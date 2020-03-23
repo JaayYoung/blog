@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Dunwu&#39;s Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dunwu">
+<meta property="og:url" content="https://dunwu.github.io/blog/page/4/index.html">
+<meta property="og:site_name" content="Dunwu">
+<meta property="og:description" content="Dunwu&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Zhang Peng">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://dunwu.github.io/blog/page/4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Dunwu</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/blog/atom.xml" title="Dunwu" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dunwu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">大道至简，知易行难</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">51</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">77</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/dunwu" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/network/network-application/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/network/network-application/" class="post-title-link" itemprop="url">计算机网络之应用层</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/network/network-application/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="network/network-application/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计算机网络之应用层"><a class="markdownIt-Anchor" href="#计算机网络之应用层"></a> 计算机网络之应用层</h1>
+<blockquote>
+<p>📦 本文已归档到：「<a href="https://github.com/dunwu/blog" target="_blank" rel="noopener">blog</a>」</p>
+</blockquote>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#http">HTTP</a></li>
+<li><a href="#dns">DNS</a></li>
+<li><a href="#ftp">FTP</a></li>
+<li><a href="#dhcp">DHCP</a></li>
+<li><a href="#telnet">TELNET</a></li>
+<li><a href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%8D%8F%E8%AE%AE">电子邮件协议</a>
+<ul>
+<li><a href="#1-smtp">1. SMTP</a></li>
+<li><a href="#2-pop3">2. POP3</a></li>
+<li><a href="#3-imap">3. IMAP</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E7%AB%AF%E5%8F%A3">常用端口</a></li>
+<li><a href="#web-%E9%A1%B5%E9%9D%A2%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B">Web 页面请求过程</a>
+<ul>
+<li><a href="#1-dhcp-%E9%85%8D%E7%BD%AE%E4%B8%BB%E6%9C%BA%E4%BF%A1%E6%81%AF">1. DHCP 配置主机信息</a></li>
+<li><a href="#2-arp-%E8%A7%A3%E6%9E%90-mac-%E5%9C%B0%E5%9D%80">2. ARP 解析 MAC 地址</a></li>
+<li><a href="#3-dns-%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D">3. DNS 解析域名</a></li>
+<li><a href="#4-http-%E8%AF%B7%E6%B1%82%E9%A1%B5%E9%9D%A2">4. HTTP 请求页面</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="http"><a class="markdownIt-Anchor" href="#http"></a> HTTP</h2>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551096916007.png!zp"/></div>
+<p>超文本传输协议（英语：HyperText Transfer Protocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议。HTTP 是万维网的数据通信的基础。</p>
+<p>设计 HTTP 最初的目的是为了提供一种发布和接收 HTML 页面的方法。通过 HTTP 或者 HTTPS 协议请求的资源由统一资源标识符（Uniform Resource Identifiers，URI）来标识。</p>
+<p>安全套接字层超文本传输协议 HTTPS 为了数据传输的安全，HTTPS 在 HTTP 的基础上加入了 SSL 协议，SSL 依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。</p>
+<blockquote>
+<p>👉 扩展阅读：<a href="HTTP.md">HTTP</a></p>
+</blockquote>
+<h2 id="dns"><a class="markdownIt-Anchor" href="#dns"></a> DNS</h2>
+<p>域名服务器 DNS 是一个分布式数据库，提供了主机名和 IP 地址之间相互转换的服务。这里的分布式数据库是指，每个站点只保留它自己的那部分数据。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551094759786.png!zp"/></div>
+<p>域名具有层次结构，从上到下依次为：根域名、顶级域名、二级域名。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551094954067.png!zp"/></div>
+<p>DNS 可以使用 UDP 或者 TCP 进行传输，使用的端口号都为 53。大多数情况下 DNS 使用 UDP 进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传来保证可靠性。在两种情况下会使用 TCP 进行传输：</p>
+<ul>
+<li>如果返回的响应超过的 512 字节（UDP 最大只支持 512 字节的数据）。</li>
+<li>区域传送（区域传送是主域名服务器向辅助域名服务器传送变化的那部分数据）。</li>
+</ul>
+<blockquote>
+<p>👉 扩展阅读：<a href="DNS.md">DNS</a></p>
+</blockquote>
+<h2 id="ftp"><a class="markdownIt-Anchor" href="#ftp"></a> FTP</h2>
+<p>文件传送协议 FTP 使用 TCP 进行连接，它需要两个连接来传送一个文件：</p>
+<ul>
+<li>控制连接：服务器打开端口号 21 等待客户端的连接，客户端主动建立连接后，使用这个连接将客户端的命令传送给服务器，并传回服务器的应答。</li>
+<li>数据连接：用来传送一个文件数据。</li>
+</ul>
+<p>根据数据连接是否是服务器端主动建立，FTP 有主动和被动两种模式：</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551095440002.png!zp"/></div>
+<ul>
+<li>主动模式：服务器端主动建立数据连接，其中服务器端的端口号为 20，客户端的端口号随机，但是必须大于 1024，因为 0~1023 是熟知端口号。</li>
+<li>被动模式：客户端主动建立数据连接，其中客户端的端口号由客户端自己指定，服务器端的端口号随机。</li>
+</ul>
+<p>主动模式要求客户端开放端口号给服务器端，需要去配置客户端的防火墙。被动模式只需要服务器端开放端口号即可，无需客户端配置防火墙。但是被动模式会导致服务器端的安全性减弱，因为开放了过多的端口号。</p>
+<p>FTPS 是一种对常用的文件传输协议（FTP）添加传输层安全（TLS）和安全套接层（SSL）加密协议支持的扩展协议。</p>
+<h2 id="dhcp"><a class="markdownIt-Anchor" href="#dhcp"></a> DHCP</h2>
+<p>动态主机配置协议 DHCP (Dynamic Host Configuration Protocol) 提供了即插即用的连网方式，用户不再需要去手动配置 IP 地址等信息。</p>
+<p>DHCP 配置的内容不仅是 IP 地址，还包括子网掩码、网关 IP 地址。</p>
+<p>DHCP 工作过程如下：</p>
+<ol>
+<li>客户端发送 Discover 报文，该报文的目的地址为 255.255.255.255:67，源地址为 0.0.0.0:68，被放入 UDP 中，该报文被广播到同一个子网的所有主机上。如果客户端和 DHCP 服务器不在同一个子网，就需要使用中继代理。</li>
+<li>DHCP 服务器收到 Discover 报文之后，发送 Offer 报文给客户端，该报文包含了客户端所需要的信息。因为客户端可能收到多个 DHCP 服务器提供的信息，因此客户端需要进行选择。</li>
+<li>如果客户端选择了某个 DHCP 服务器提供的信息，那么就发送 Request 报文给该 DHCP 服务器。</li>
+<li>DHCP 服务器发送 Ack 报文，表示客户端此时可以使用提供给它的信息。</li>
+</ol>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/application/1551095610521.png!zp"/></div>
+<h2 id="telnet"><a class="markdownIt-Anchor" href="#telnet"></a> TELNET</h2>
+<p>远程登录协议 TELNET 用于登录到远程主机上，并且远程主机上的输出也会返回。</p>
+<p>TELNET 可以适应许多计算机和操作系统的差异，例如不同操作系统系统的换行符定义。</p>
+<h2 id="电子邮件协议"><a class="markdownIt-Anchor" href="#电子邮件协议"></a> 电子邮件协议</h2>
+<p>一个电子邮件系统由三部分组成：用户代理、邮件服务器以及邮件协议。</p>
+<p>邮件协议包含发送协议和读取协议，发送协议常用 SMTP，读取协议常用 POP3 和 IMAP。</p>
+<h3 id="1-smtp"><a class="markdownIt-Anchor" href="#1-smtp"></a> 1. SMTP</h3>
+<p>SMTP 只能发送 ASCII 码，而互联网邮件扩充 MIME 可以发送二进制文件。MIME 并没有改动或者取代 SMTP，而是增加邮件主体的结构，定义了非 ASCII 码的编码规则。</p>
+<h3 id="2-pop3"><a class="markdownIt-Anchor" href="#2-pop3"></a> 2. POP3</h3>
+<p>POP3 的特点是只要用户从服务器上读取了邮件，就把该邮件删除。</p>
+<h3 id="3-imap"><a class="markdownIt-Anchor" href="#3-imap"></a> 3. IMAP</h3>
+<p>IMAP 协议中客户端和服务器上的邮件保持同步，如果不手动删除邮件，那么服务器上的邮件也不会被删除。IMAP 这种做法可以让用户随时随地去访问服务器上的邮件。</p>
+<h2 id="常用端口"><a class="markdownIt-Anchor" href="#常用端口"></a> 常用端口</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">应用</th>
+<th style="text-align:center">应用层协议</th>
+<th style="text-align:center">端口号</th>
+<th style="text-align:center">传输层协议</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">域名解析</td>
+<td style="text-align:center">DNS</td>
+<td style="text-align:center">53</td>
+<td style="text-align:center">UDP/TCP</td>
+<td style="text-align:center">长度超过 512 字节时使用 TCP</td>
+</tr>
+<tr>
+<td style="text-align:center">动态主机配置协议</td>
+<td style="text-align:center">DHCP</td>
+<td style="text-align:center">67/68</td>
+<td style="text-align:center">UDP</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">简单网络管理协议</td>
+<td style="text-align:center">SNMP</td>
+<td style="text-align:center">161/162</td>
+<td style="text-align:center">UDP</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">文件传送协议</td>
+<td style="text-align:center">FTP</td>
+<td style="text-align:center">20/21</td>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center">控制连接 21，数据连接 20</td>
+</tr>
+<tr>
+<td style="text-align:center">远程终端协议</td>
+<td style="text-align:center">TELNET</td>
+<td style="text-align:center">23</td>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">超文本传送协议</td>
+<td style="text-align:center">HTTP</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">简单邮件传送协议</td>
+<td style="text-align:center">SMTP</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">邮件读取协议</td>
+<td style="text-align:center">POP3</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">网际报文存取协议</td>
+<td style="text-align:center">IMAP</td>
+<td style="text-align:center">143</td>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="web-页面请求过程"><a class="markdownIt-Anchor" href="#web-页面请求过程"></a> Web 页面请求过程</h2>
+<h3 id="1-dhcp-配置主机信息"><a class="markdownIt-Anchor" href="#1-dhcp-配置主机信息"></a> 1. DHCP 配置主机信息</h3>
+<ul>
+<li>假设主机最开始没有 IP 地址以及其它信息，那么就需要先使用 DHCP 来获取。</li>
+<li>主机生成一个 DHCP 请求报文，并将这个报文放入具有目的端口 67 和源端口 68 的 UDP 报文段中。</li>
+<li>该报文段则被放入在一个具有广播 IP 目的地址(255.255.255.255) 和源 IP 地址（0.0.0.0）的 IP 数据报中。</li>
+<li>该数据报则被放置在 MAC 帧中，该帧具有目的地址 FF:FF:FF:FF:FF:FF，将广播到与交换机连接的所有设备。</li>
+<li>连接在交换机的 DHCP 服务器收到广播帧之后，不断地向上分解得到 IP 数据报、UDP 报文段、DHCP 请求报文，之后生成 DHCP ACK 报文，该报文包含以下信息：IP 地址、DNS 服务器的 IP 地址、默认网关路由器的 IP 地址和子网掩码。该报文被放入 UDP 报文段中，UDP 报文段有被放入 IP 数据报中，最后放入 MAC 帧中。</li>
+<li>该帧的目的地址是请求主机的 MAC 地址，因为交换机具有自学习能力，之前主机发送了广播帧之后就记录了 MAC 地址到其转发接口的交换表项，因此现在交换机就可以直接知道应该向哪个接口发送该帧。</li>
+<li>主机收到该帧后，不断分解得到 DHCP 报文。之后就配置它的 IP 地址、子网掩码和 DNS 服务器的 IP 地址，并在其 IP 转发表中安装默认网关。</li>
+</ul>
+<h3 id="2-arp-解析-mac-地址"><a class="markdownIt-Anchor" href="#2-arp-解析-mac-地址"></a> 2. ARP 解析 MAC 地址</h3>
+<ul>
+<li>主机通过浏览器生成一个 TCP 套接字，套接字向 HTTP 服务器发送 HTTP 请求。为了生成该套接字，主机需要知道网站的域名对应的 IP 地址。</li>
+<li>主机生成一个 DNS 查询报文，该报文具有 53 号端口，因为 DNS 服务器的端口号是 53。</li>
+<li>该 DNS 查询报文被放入目的地址为 DNS 服务器 IP 地址的 IP 数据报中。</li>
+<li>该 IP 数据报被放入一个以太网帧中，该帧将发送到网关路由器。</li>
+<li>DHCP 过程只知道网关路由器的 IP 地址，为了获取网关路由器的 MAC 地址，需要使用 ARP 协议。</li>
+<li>主机生成一个包含目的地址为网关路由器 IP 地址的 ARP 查询报文，将该 ARP 查询报文放入一个具有广播目的地址（FF:FF:FF:FF:FF:FF）的以太网帧中，并向交换机发送该以太网帧，交换机将该帧转发给所有的连接设备，包括网关路由器。</li>
+<li>网关路由器接收到该帧后，不断向上分解得到 ARP 报文，发现其中的 IP 地址与其接口的 IP 地址匹配，因此就发送一个 ARP 回答报文，包含了它的 MAC 地址，发回给主机。</li>
+</ul>
+<h3 id="3-dns-解析域名"><a class="markdownIt-Anchor" href="#3-dns-解析域名"></a> 3. DNS 解析域名</h3>
+<ul>
+<li>知道了网关路由器的 MAC 地址之后，就可以继续 DNS 的解析过程了。</li>
+<li>网关路由器接收到包含 DNS 查询报文的以太网帧后，抽取出 IP 数据报，并根据转发表决定该 IP 数据报应该转发的路由器。</li>
+<li>因为路由器具有内部网关协议（RIP、OSPF）和外部网关协议（BGP）这两种路由选择协议，因此路由表中已经配置了网关路由器到达 DNS 服务器的路由表项。</li>
+<li>到达 DNS 服务器之后，DNS 服务器抽取出 DNS 查询报文，并在 DNS 数据库中查找待解析的域名。</li>
+<li>找到 DNS 记录之后，发送 DNS 回答报文，将该回答报文放入 UDP 报文段中，然后放入 IP 数据报中，通过路由器反向转发回网关路由器，并经过以太网交换机到达主机。</li>
+</ul>
+<h3 id="4-http-请求页面"><a class="markdownIt-Anchor" href="#4-http-请求页面"></a> 4. HTTP 请求页面</h3>
+<ul>
+<li>有了 HTTP 服务器的 IP 地址之后，主机就能够生成 TCP 套接字，该套接字将用于向 Web 服务器发送 HTTP GET 报文。</li>
+<li>在生成 TCP 套接字之前，必须先与 HTTP 服务器进行三次握手来建立连接。生成一个具有目的端口 80 的 TCP SYN 报文段，并向 HTTP 服务器发送该报文段。</li>
+<li>HTTP 服务器收到该报文段之后，生成 TCP SYN ACK 报文段，发回给主机。</li>
+<li>连接建立之后，浏览器生成 HTTP GET 报文，并交付给 HTTP 服务器。</li>
+<li>HTTP 服务器从 TCP 套接字读取 HTTP GET 报文，生成一个 HTTP 响应报文，将 Web 页面内容放入报文主体中，发回给主机。</li>
+<li>浏览器收到 HTTP 响应报文后，抽取出 Web 页面内容，之后进行渲染，显示 Web 页面。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/network/network-data-link/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/network/network-data-link/" class="post-title-link" itemprop="url">计算机网络之数据链路层</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/network/network-data-link/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="network/network-data-link/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计算机网络之数据链路层"><a class="markdownIt-Anchor" href="#计算机网络之数据链路层"></a> 计算机网络之数据链路层</h1>
+<blockquote>
+<p>📦 本文已归档到：「<a href="https://github.com/dunwu/blog" target="_blank" rel="noopener">blog</a>」</p>
+<p><strong>数据链路层（Data Link Layer）</strong> - 网络层针对的还是主机之间的数据传输服务，而主机之间可以有很多链路，链路层协议就是为同一链路的主机提供数据传输服务。数据链路层把网络层传下来的分组封装成帧。</p>
+<ul>
+<li>主要协议：<code>PPP</code>、<code>CSMA/CD</code> 等。</li>
+<li>数据单元：帧（frame）。</li>
+<li>典型设备：二层交换机、网桥、网卡。</li>
+</ul>
+</blockquote>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E9%97%AE%E9%A2%98">基本问题</a>
+<ul>
+<li><a href="#%E5%B0%81%E8%A3%85%E6%88%90%E5%B8%A7">封装成帧</a></li>
+<li><a href="#%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93">透明传输</a></li>
+<li><a href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B">差错检测</a></li>
+</ul>
+</li>
+<li><a href="#%E7%82%B9%E5%AF%B9%E7%82%B9%E4%BF%A1%E9%81%93">点对点信道</a>
+<ul>
+<li><a href="#ppp-%E5%8D%8F%E8%AE%AE">PPP 协议</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B9%BF%E6%92%AD%E4%BF%A1%E9%81%93">广播信道</a>
+<ul>
+<li><a href="#csmacd-%E5%8D%8F%E8%AE%AE">CSMA/CD 协议</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B1%80%E5%9F%9F%E7%BD%91">局域网</a></li>
+<li><a href="#%E4%BB%A5%E5%A4%AA%E7%BD%91">以太网</a></li>
+<li><a href="#mac-%E5%9C%B0%E5%9D%80">MAC 地址</a></li>
+<li><a href="#%E8%AE%BE%E5%A4%87">设备</a>
+<ul>
+<li><a href="#%E9%80%82%E9%85%8D%E5%99%A8">适配器</a></li>
+<li><a href="#%E9%9B%86%E7%BA%BF%E5%99%A8">集线器</a></li>
+<li><a href="#%E7%BD%91%E6%A1%A5">网桥</a></li>
+<li><a href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA">以太网交换机</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
+<ul>
+<li>链路是从一个节点到相邻节点的一段物理线路，数据链路则是在链路的基础上增加了一些必要的硬件（网络适配器）和软件（协议）。</li>
+<li>数据链路层三个基本问题：封装成帧、透明传输、差错检测。</li>
+<li>数据链路层有两种信道类型：点对点信道（主要使用 <code>PPP</code>）和广播信道（主要使用 <code>CSMA/CD</code>）。</li>
+<li>以太网 MAC 层的地址。</li>
+<li>适配器、转发器、集线器、网桥、以太网交换机的作用及使用场合。</li>
+</ul>
+<h2 id="基本问题"><a class="markdownIt-Anchor" href="#基本问题"></a> 基本问题</h2>
+<h3 id="封装成帧"><a class="markdownIt-Anchor" href="#封装成帧"></a> 封装成帧</h3>
+<p>为网络层传下来的 IP 数据报添加首部和尾部，用于标记帧的开始和结束。</p>
+<p>为了提高传输效率，应该让数据部分长度尽可能大于首部和尾部。但是，每种链路层协议都限制了帧的数据部分长度上线——最大传送单元 MTU（Maximum Transfer Unit）</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/数据链路帧.png!zp"/></div>
+<h3 id="透明传输"><a class="markdownIt-Anchor" href="#透明传输"></a> 透明传输</h3>
+<p><strong>透明</strong>表示：某一个实际存在的事物看起来好像不存在一样。</p>
+<p>帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧的开始和结束位置就会被错误的判定。需要在数据部分出现首部尾部相同的内容前面插入转义字符。如果数据部分出现转义字符，那么就在转义字符前面再加个转义字符。在接收端进行处理之后可以还原出原始数据。这个过程透明传输的内容是转义字符，用户察觉不到转义字符的存在。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/经过字节填充后发送的数据.png!zp"/></div>
+<h3 id="差错检测"><a class="markdownIt-Anchor" href="#差错检测"></a> 差错检测</h3>
+<p>目前数据链路层广泛使用了<a href="https://zh.wikipedia.org/wiki/%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener"><strong>循环冗余检验 CRC（Cyclic redundancy check）</strong></a>来检查比特差错。</p>
+<h2 id="点对点信道"><a class="markdownIt-Anchor" href="#点对点信道"></a> 点对点信道</h2>
+<p>点对点信道使用一对一的点对点通信方式。</p>
+<p>对于点对点的链路，点对点协议 PPP（Point-to-Point Protocol）是使用最广泛的数据链路层协议。</p>
+<h3 id="ppp-协议"><a class="markdownIt-Anchor" href="#ppp-协议"></a> PPP 协议</h3>
+<p>互联网用户通常都要连接到某个 ISP 之后才能接入到互联网，PPP 协议是用户计算机和 ISP 进行通信时所使用的数据链路层协议。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/PPP协议.png!zp"/></div>
+<p>PPP（点到点协议）是为在同等单元之间传输数据包这样的简单链路设计的链路层协议。这种链路提供全双工操作，并按照顺序传递数据包。设计目的主要是用来通过拨号或专线方式建立点对点连接发送数据，使其成为各种主机、网桥和路由器之间简单连接的一种共通的解决方案。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/PPP帧.png!zp"/></div>
+<p>PPP 的帧格式：</p>
+<ul>
+<li>F 字段为帧的定界符</li>
+<li>A 和 C 字段暂时没有意义</li>
+<li>FCS 字段是使用 CRC 的检验序列</li>
+<li>信息部分的长度不超过 1500</li>
+</ul>
+<h2 id="广播信道"><a class="markdownIt-Anchor" href="#广播信道"></a> 广播信道</h2>
+<p>广播信道(broadcast channel)是通过广播的方式传输信息的信息通道。</p>
+<p>所有的节点都在同一个广播信道上发送数据，因此需要有专门的控制方法进行协调，避免发生冲突（冲突也叫碰撞）。</p>
+<p>主要有两种控制方法进行协调，一个是使用信道复用技术，一是使用 CSMA/CD 协议。</p>
+<h3 id="csmacd-协议"><a class="markdownIt-Anchor" href="#csmacd-协议"></a> CSMA/CD 协议</h3>
+<p>CSMA/CD（Carrier Sense Multiple Access with Collision Detection）即带冲突检测的载波监听多路访问技术(载波监听多点接入/碰撞检测)。</p>
+<ul>
+<li><strong>多点接入</strong> ：说明这是总线型网络，许多计算机以多点接入的方式连接在一根总线上。</li>
+<li><strong>载波监听</strong> ：每个主机都必须不停地监听信道。发送前监听，如果忙则等待，如果空闲则发送。</li>
+<li><strong>碰撞检测</strong> ：即边发送边检测。若检测到信道有干扰信号，则表示产生了碰撞，于是就要停止发送数据，计算出退避等待时间，然后使用 CSMA 方法继续尝试发送。计算退避等待时间采用的是<a href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E9%80%80%E9%81%BF%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">二进制指数退避算法</a>。</li>
+</ul>
+<h2 id="局域网"><a class="markdownIt-Anchor" href="#局域网"></a> 局域网</h2>
+<p>局域网 LAN（Local Area Network）是指在某一区域内由多台计算机互联成的计算机组。</p>
+<p>局域网的拓扑结构通常为总线型和环型。</p>
+<p>局域网技术主要有：以太网、令牌环网、FDDI 网和无线局域网等。</p>
+<h2 id="以太网"><a class="markdownIt-Anchor" href="#以太网"></a> 以太网</h2>
+<p>以太网（Ethernet）是一种星型拓扑结构局域网。</p>
+<p>以太网是目前应用最广泛的局域网。</p>
+<p>以太网使用 CSMA/CD 协议。</p>
+<h2 id="mac-地址"><a class="markdownIt-Anchor" href="#mac-地址"></a> MAC 地址</h2>
+<p>MAC 地址（Media Access Control Address），也称为以太网地址或物理地址，它是一个用来确认网上设备位置的地址。</p>
+<p>MAC 地址长度为 6 字节（48 位），用于唯一标识网络适配器（网卡）。</p>
+<p>一台主机拥有多少个网络适配器就有多少个 MAC 地址。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/data-link/MAC帧.png!zp"/></div>
+<h2 id="设备"><a class="markdownIt-Anchor" href="#设备"></a> 设备</h2>
+<h3 id="适配器"><a class="markdownIt-Anchor" href="#适配器"></a> 适配器</h3>
+<p>网络适配器一般指网卡。</p>
+<p>网卡是工作在链路层的网络组件，是局域网中连接计算机和传输介质的接口，不仅能实现与局域网传输介质之间的物理连接和电信号匹配，还涉及帧的发送与接收、帧的封装与拆封、介质访问控制、数据的编码与解码以及数据缓存的功能等。</p>
+<p>网卡和局域网之间的通信是通过电缆或双绞线以串行传输方式进行的。而网卡和计算机之间的通信则是通过计算机主板上的 I/O 总线以并行传输方式进行。</p>
+<h3 id="集线器"><a class="markdownIt-Anchor" href="#集线器"></a> 集线器</h3>
+<p>集线器（Hub）的主要功能是对接收到的信号进行再生整形放大，以扩大网络的传输距离，同时把所有节点集中在以它为中心的节点上。</p>
+<p>使用集线器可以在物理层扩展以太网。</p>
+<h3 id="网桥"><a class="markdownIt-Anchor" href="#网桥"></a> 网桥</h3>
+<p>网桥（Bridge）是早期的两端口二层网络设备，用来连接不同网段。网桥的两个端口分别有一条独立的交换信道，不是共享一条背板总线，可隔离冲突域。网桥比集线器（Hub）性能更好，集线器上各端口都是共享同一条背板总线的。后来，网桥被具有更多端口、同时也可隔离冲突域的交换机（Switch）所取代。</p>
+<h3 id="以太网交换机"><a class="markdownIt-Anchor" href="#以太网交换机"></a> 以太网交换机</h3>
+<p>以太网交换机是基于以太网传输数据的交换机，以太网采用共享总线型传输媒体方式的局域网。以太网交换机的结构是每个端口都直接与主机相连，并且一般都工作在全双工方式。交换机能同时连通许多对端口，使每一对相互通信的主机都能像独占通信媒体那样，进行无冲突地传输数据。</p>
+<ul>
+<li>以太网交换机的每个端口都直接与主机相连，并且一般都工作在全双工方式。</li>
+<li>交换机能同时连通许多对的端口，使每一对相互通信的主机都能像独占通信媒体那样，进行无冲突地传输数据。</li>
+<li>用户独占传输媒体的带宽，若一个接口到主机的带宽是 10Mbit 每秒，那么有 10 个接口的交换机的总容量是 100Mbit 每秒。这是交换机的最大优点。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/network/network-network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/network/network-network/" class="post-title-link" itemprop="url">计算机网络之网络层</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/network/network-network/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="network/network-network/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计算机网络之网络层"><a class="markdownIt-Anchor" href="#计算机网络之网络层"></a> 计算机网络之网络层</h1>
+<blockquote>
+<p>📦 本文已归档到：「<a href="https://github.com/dunwu/blog" target="_blank" rel="noopener">blog</a>」</p>
+<p><strong>网络层（network layer）</strong> - 为分组交换网上的不同主机提供通信服务。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组或包进行传送。</p>
+<ul>
+<li>主要协议：<code>IP</code>、<code>ICMP</code>。</li>
+<li>数据单元：IP 数据报（packet）。</li>
+<li>典型设备：网关、路由器。</li>
+</ul>
+</blockquote>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#ip-%E5%8D%8F%E8%AE%AE">IP 协议</a>
+<ul>
+<li><a href="#%E7%9B%B8%E5%85%B3%E5%8D%8F%E8%AE%AE">相关协议</a></li>
+<li><a href="#%E5%88%86%E7%B1%BB%E7%9A%84-ip-%E5%9C%B0%E5%9D%80">分类的 IP 地址</a></li>
+<li><a href="#ip-%E5%9C%B0%E5%9D%80%E4%B8%8E%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80">IP 地址与物理地址</a></li>
+<li><a href="#ip-%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F">IP 数据报格式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AE-arp">地址解析协议 ARP</a></li>
+<li><a href="#%E7%BD%91%E9%99%85%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87%E5%8D%8F%E8%AE%AE-icmp">网际控制报文协议 ICMP</a>
+<ul>
+<li><a href="#1-ping">1. Ping</a></li>
+<li><a href="#2-traceroute">2. Traceroute</a></li>
+</ul>
+</li>
+<li><a href="#%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E7%BD%91-vpn">虚拟专用网 VPN</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2-nat">网络地址转换 NAT</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E7%BB%93%E6%9E%84">路由器的结构</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%86%E7%BB%84%E8%BD%AC%E5%8F%91%E6%B5%81%E7%A8%8B">路由器分组转发流程</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE">路由选择协议</a>
+<ul>
+<li><a href="#1-%E5%86%85%E9%83%A8%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE-rip">1. 内部网关协议 RIP</a></li>
+<li><a href="#2-%E5%86%85%E9%83%A8%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE-ospf">2. 内部网关协议 OSPF</a></li>
+<li><a href="#3-%E5%A4%96%E9%83%A8%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE-bgp">3. 外部网关协议 BGP</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h2>
+<p>网络层向上只提供简单灵活的、无连接的、尽最大努力交付的数据报服务。网络层不提供服务质量的承诺，不保证分组交付的时限，所传送的分组可能出错、丢失、重复和失序。进程间通信的可靠性由运输层负责。</p>
+<h2 id="ip-协议"><a class="markdownIt-Anchor" href="#ip-协议"></a> IP 协议</h2>
+<p>网际协议 IP (Internet Protocol) 定义了三种功能：</p>
+<ol>
+<li>IP 定义了在 TCP/IP 互联网上数据传送的基本单元和数据格式。</li>
+<li>IP 软件完成路由选择功能，选择数据传送的路径。</li>
+<li>IP 包含了一组不可靠分组传送的规则，指明了分组处理、差错信息发生以及分组的规则。</li>
+</ol>
+<h3 id="相关协议"><a class="markdownIt-Anchor" href="#相关协议"></a> 相关协议</h3>
+<p>与 IP 协议配套使用的还有三个协议：</p>
+<ul>
+<li>地址解析协议 ARP（Address Resolution Protocol）</li>
+<li>网际控制报文协议 ICMP（Internet Control Message Protocol）</li>
+<li>网际组管理协议 IGMP（Internet Group Management Protocol）</li>
+</ul>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1550912617336.png!zp"/></div>
+<h3 id="分类的-ip-地址"><a class="markdownIt-Anchor" href="#分类的-ip-地址"></a> 分类的 IP 地址</h3>
+<p>IP 地址的编址方式经历了三个历史阶段：</p>
+<ul>
+<li>分类</li>
+<li>子网划分</li>
+<li>无分类</li>
+</ul>
+<h4 id="1-分类"><a class="markdownIt-Anchor" href="#1-分类"></a> 1. 分类</h4>
+<p>由两部分组成，网络号和主机号，其中不同分类具有不同的网络号长度，并且是固定的。</p>
+<figure class="highlight bnf"><table><tr><td class="code"><pre><span class="line">IP 地址 ::= &#123;&lt; 网络号 &gt;, &lt; 主机号 &gt;&#125;</span><br></pre></td></tr></table></figure>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086738403.png!zp"/></div>
+<h4 id="2-子网划分"><a class="markdownIt-Anchor" href="#2-子网划分"></a> 2. 子网划分</h4>
+<p>通过在主机号字段中拿一部分作为子网号，把两级 IP 地址划分为三级 IP 地址。</p>
+<figure class="highlight bnf"><table><tr><td class="code"><pre><span class="line">IP 地址 ::= &#123;&lt; 网络号 &gt;, &lt; 子网号 &gt;, &lt; 主机号 &gt;&#125;</span><br></pre></td></tr></table></figure>
+<p>要使用子网，必须配置子网掩码。一个 B 类地址的默认子网掩码为 255.255.0.0，如果 B 类地址的子网占两个比特，那么子网掩码为 11111111 11111111 11000000 00000000，也就是 255.255.192.0。</p>
+<p>注意，外部网络看不到子网的存在。</p>
+<h4 id="3-无分类"><a class="markdownIt-Anchor" href="#3-无分类"></a> 3. 无分类</h4>
+<p>无分类编址 CIDR 消除了传统 A 类、B 类和 C 类地址以及划分子网的概念，使用网络前缀和主机号来对 IP 地址进行编码，网络前缀的长度可以根据需要变化。</p>
+<figure class="highlight bnf"><table><tr><td class="code"><pre><span class="line">IP 地址 ::= &#123;&lt; 网络前缀号 &gt;, &lt; 主机号 &gt;&#125;</span><br></pre></td></tr></table></figure>
+<p>CIDR 的记法上采用在 IP 地址后面加上网络前缀长度的方法，例如 128.14.35.7/20 表示前 20 位为网络前缀。</p>
+<p>CIDR 的地址掩码可以继续称为子网掩码，子网掩码首 1 长度为网络前缀的长度。</p>
+<p>一个 CIDR 地址块中有很多地址，一个 CIDR 表示的网络就可以表示原来的很多个网络，并且在路由表中只需要一个路由就可以代替原来的多个路由，减少了路由表项的数量。把这种通过使用网络前缀来减少路由表项的方式称为路由聚合，也称为 <strong>构成超网</strong> 。</p>
+<p>在路由表中的项目由“网络前缀”和“下一跳地址”组成，在查找时可能会得到不止一个匹配结果，应当采用最长前缀匹配来确定应该匹配哪一个。</p>
+<h3 id="ip-地址与物理地址"><a class="markdownIt-Anchor" href="#ip-地址与物理地址"></a> IP 地址与物理地址</h3>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551088476626.png!zp"/></div>
+<ul>
+<li>物理地址是数据链路层和物理层使用的地址。</li>
+<li>IP 地址是网络层和以上各层使用的地址，是一种逻辑地址。</li>
+</ul>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551088631948.png!zp"/></div>
+<h3 id="ip-数据报格式"><a class="markdownIt-Anchor" href="#ip-数据报格式"></a> IP 数据报格式</h3>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1550913213250.png!zp"/></div>
+<ul>
+<li><strong>版本</strong> - 有 4（IPv4）和 6（IPv6）两个值。</li>
+<li><strong>首部长度</strong> - 占 4 位，因此最大十进制数值为 15。值为 1 表示的是 1 个 32 位字的长度，也就是 4 字节。因为首部固定长度为 20 字节，因此该值最小为 5。如果可选字段的长度不是 4 字节的整数倍，就用尾部的填充部分来填充。</li>
+<li><strong>区分服务</strong> - 用来获得更好的服务，一般情况下不使用。</li>
+<li><strong>总长度</strong> - 包括首部长度和数据部分长度。占 16 位，因此数据报的最大长度为 2 <sup>16</sup> - 1 = 65535 字节。</li>
+<li><strong>生存时间</strong> - TTL，它的存在是为了防止无法交付的数据报在互联网中不断兜圈子。以路由器跳数为单位，当 TTL 为 0 时就丢弃数据报。</li>
+<li><strong>协议</strong> - 指出携带的数据应该上交给哪个协议进行处理，例如 ICMP、TCP、UDP 等。</li>
+<li><strong>首部检验和</strong> - 因为数据报每经过一个路由器，都要重新计算检验和，因此检验和不包含数据部分可以减少计算的工作量。</li>
+<li><strong>标识</strong> - 在数据报长度过长从而发生分片的情况下，相同数据报的不同分片具有相同的标识符。</li>
+<li><strong>片偏移</strong> - 和标识符一起，用于发生分片的情况。片偏移的单位为 8 字节。</li>
+</ul>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1550913364479.png!zp"/></div>
+<h2 id="地址解析协议-arp"><a class="markdownIt-Anchor" href="#地址解析协议-arp"></a> 地址解析协议 ARP</h2>
+<p>网络层实现主机之间的通信，而链路层实现具体每段链路之间的通信。因此在通信过程中，IP 数据报的源地址和目的地址始终不变，而 MAC 地址随着链路的改变而改变。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086787261.png!zp"/></div>
+<p>ARP 实现由 IP 地址得到 MAC 地址。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086769846.png!zp"/></div>
+<p>每个主机都有一个 ARP 高速缓存，里面有本局域网上的各主机和路由器的 IP 地址到 MAC 地址的映射表。</p>
+<p>如果主机 A 知道主机 B 的 IP 地址，但是 ARP 高速缓存中没有该 IP 地址到 MAC 地址的映射，此时主机 A 通过广播的方式发送 ARP 请求分组，主机 B 收到该请求后会发送 ARP 响应分组给主机 A 告知其 MAC 地址，随后主机 A 向其高速缓存中写入主机 B 的 IP 地址到 MAC 地址的映射。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086833117.png!zp"/></div>
+<h2 id="网际控制报文协议-icmp"><a class="markdownIt-Anchor" href="#网际控制报文协议-icmp"></a> 网际控制报文协议 ICMP</h2>
+<p>ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。它封装在 IP 数据报中，但是不属于高层协议。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086857345.png!zp"/></div>
+<p>ICMP 报文分为差错报告报文和询问报文。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086870897.png!zp"/></div>
+<h3 id="1-ping"><a class="markdownIt-Anchor" href="#1-ping"></a> 1. Ping</h3>
+<p>Ping 是 ICMP 的一个重要应用，主要用来测试两台主机之间的连通性。</p>
+<p>Ping 的原理是通过向目的主机发送 ICMP Echo 请求报文，目的主机收到之后会发送 Echo 回答报文。Ping 会根据时间和成功响应的次数估算出数据包往返时间以及丢包率。</p>
+<h3 id="2-traceroute"><a class="markdownIt-Anchor" href="#2-traceroute"></a> 2. Traceroute</h3>
+<p>Traceroute 是 ICMP 的另一个应用，用来跟踪一个分组从源点到终点的路径。</p>
+<p>Traceroute 发送的 IP 数据报封装的是无法交付的 UDP 用户数据报，并由目的主机发送终点不可达差错报告报文。</p>
+<ul>
+<li>源主机向目的主机发送一连串的 IP 数据报。第一个数据报 P1 的生存时间 TTL 设置为 1，当 P1 到达路径上的第一个路由器 R1 时，R1 收下它并把 TTL 减 1，此时 TTL 等于 0，R1 就把 P1 丢弃，并向源主机发送一个 ICMP 时间超过差错报告报文；</li>
+<li>源主机接着发送第二个数据报 P2，并把 TTL 设置为 2。P2 先到达 R1，R1 收下后把 TTL 减 1 再转发给 R2，R2 收下后也把 TTL 减 1，由于此时 TTL 等于 0，R2 就丢弃 P2，并向源主机发送一个 ICMP 时间超过差错报文。</li>
+<li>不断执行这样的步骤，直到最后一个数据报刚刚到达目的主机，主机不转发数据报，也不把 TTL 值减 1。但是因为数据报封装的是无法交付的 UDP，因此目的主机要向源主机发送 ICMP 终点不可达差错报告报文。</li>
+<li>之后源主机知道了到达目的主机所经过的路由器 IP 地址以及到达每个路由器的往返时间。</li>
+</ul>
+<h2 id="虚拟专用网-vpn"><a class="markdownIt-Anchor" href="#虚拟专用网-vpn"></a> 虚拟专用网 VPN</h2>
+<p>由于 IP 地址的紧缺，一个机构能申请到的 IP 地址数往往远小于本机构所拥有的主机数。并且一个机构并不需要把所有的主机接入到外部的互联网中，机构内的计算机可以使用仅在本机构有效的 IP 地址（专用地址）。</p>
+<p>有三个专用地址块：</p>
+<ul>
+<li>10.0.0.0 ~ 10.255.255.255</li>
+<li>172.16.0.0 ~ 172.31.255.255</li>
+<li>192.168.0.0 ~ 192.168.255.255</li>
+</ul>
+<p>VPN 使用公用的互联网作为本机构各专用网之间的通信载体。专用指机构内的主机只与本机构内的其它主机通信；虚拟指好像是，而实际上并不是，它有经过公用的互联网。</p>
+<p>下图中，场所 A 和 B 的通信经过互联网，如果场所 A 的主机 X 要和另一个场所 B 的主机 Y 通信，IP 数据报的源地址是 10.1.0.1，目的地址是 10.2.0.3。数据报先发送到与互联网相连的路由器 R1，R1 对内部数据进行加密，然后重新加上数据报的首部，源地址是路由器 R1 的全球地址 125.1.2.3，目的地址是路由器 R2 的全球地址 194.4.5.6。路由器 R2 收到数据报后将数据部分进行解密，恢复原来的数据报，此时目的地址为 10.2.0.3，就交付给 Y。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086901339.png!zp"/></div>
+<h2 id="网络地址转换-nat"><a class="markdownIt-Anchor" href="#网络地址转换-nat"></a> 网络地址转换 NAT</h2>
+<p>专用网内部的主机使用本地 IP 地址又想和互联网上的主机通信时，可以使用 NAT 来将本地 IP 转换为全球 IP。</p>
+<p>在以前，NAT 将本地 IP 和全球 IP 一一对应，这种方式下拥有 n 个全球 IP 地址的专用网内最多只可以同时有 n 台主机接入互联网。为了更有效地利用全球 IP 地址，现在常用的 NAT 转换表把传输层的端口号也用上了，使得多个专用网内部的主机共用一个全球 IP 地址。使用端口号的 NAT 也叫做网络地址与端口转换 NAPT。</p>
+<h2 id="路由器的结构"><a class="markdownIt-Anchor" href="#路由器的结构"></a> 路由器的结构</h2>
+<p>路由器从功能上可以划分为：路由选择和分组转发。</p>
+<p>分组转发结构由三个部分组成：交换结构、一组输入端口和一组输出端口。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086930371.png!zp"/></div>
+<h2 id="路由器分组转发流程"><a class="markdownIt-Anchor" href="#路由器分组转发流程"></a> 路由器分组转发流程</h2>
+<ul>
+<li>从数据报的首部提取目的主机的 IP 地址 D，得到目的网络地址 N。</li>
+<li>若 N 就是与此路由器直接相连的某个网络地址，则进行直接交付；</li>
+<li>若路由表中有目的地址为 D 的特定主机路由，则把数据报传送给表中所指明的下一跳路由器；</li>
+<li>若路由表中有到达网络 N 的路由，则把数据报传送给路由表中所指明的下一跳路由器；</li>
+<li>若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器；</li>
+<li>报告转发分组出错。</li>
+</ul>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086952828.png!zp"/></div>
+<h2 id="路由选择协议"><a class="markdownIt-Anchor" href="#路由选择协议"></a> 路由选择协议</h2>
+<p>路由选择协议都是自适应的，能随着网络通信量和拓扑结构的变化而自适应地进行调整。</p>
+<p>互联网可以划分为许多较小的自治系统 AS，一个 AS 可以使用一种和别的 AS 不同的路由选择协议。</p>
+<p>可以把路由选择协议划分为两大类：</p>
+<ul>
+<li>自治系统内部的路由选择：RIP 和 OSPF</li>
+<li>自治系统间的路由选择：BGP</li>
+</ul>
+<h3 id="1-内部网关协议-rip"><a class="markdownIt-Anchor" href="#1-内部网关协议-rip"></a> 1. 内部网关协议 RIP</h3>
+<p>RIP 是一种基于距离向量的路由选择协议。距离是指跳数，直接相连的路由器跳数为 1。跳数最多为 15，超过 15 表示不可达。</p>
+<p>RIP 按固定的时间间隔仅和相邻路由器交换自己的路由表，经过若干次交换之后，所有路由器最终会知道到达本自治系统中任何一个网络的最短距离和下一跳路由器地址。</p>
+<p>距离向量算法：</p>
+<ul>
+<li>对地址为 X 的相邻路由器发来的 RIP 报文，先修改报文中的所有项目，把下一跳字段中的地址改为 X，并把所有的距离字段加 1；</li>
+<li>对修改后的 RIP 报文中的每一个项目，进行以下步骤：</li>
+<li>若原来的路由表中没有目的网络 N，则把该项目添加到路由表中；</li>
+<li>否则：若下一跳路由器地址是 X，则把收到的项目替换原来路由表中的项目；否则：若收到的项目中的距离 d 小于路由表中的距离，则进行更新（例如原始路由表项为 Net2, 5, P，新表项为 Net2, 4, X，则更新）；否则什么也不做。</li>
+<li>若 3 分钟还没有收到相邻路由器的更新路由表，则把该相邻路由器标为不可达，即把距离置为 16。</li>
+</ul>
+<p>RIP 协议实现简单，开销小。但是 RIP 能使用的最大距离为 15，限制了网络的规模。并且当网络出现故障时，要经过比较长的时间才能将此消息传送到所有路由器。</p>
+<h3 id="2-内部网关协议-ospf"><a class="markdownIt-Anchor" href="#2-内部网关协议-ospf"></a> 2. 内部网关协议 OSPF</h3>
+<p>开放最短路径优先 OSPF，是为了克服 RIP 的缺点而开发出来的。</p>
+<p>开放表示 OSPF 不受某一家厂商控制，而是公开发表的；最短路径优先表示使用了 Dijkstra 提出的最短路径算法 SPF。</p>
+<p>OSPF 具有以下特点：</p>
+<ul>
+<li>向本自治系统中的所有路由器发送信息，这种方法是洪泛法。</li>
+<li>发送的信息就是与相邻路由器的链路状态，链路状态包括与哪些路由器相连以及链路的度量，度量用费用、距离、时延、带宽等来表示。</li>
+<li>只有当链路状态发生变化时，路由器才会发送信息。</li>
+</ul>
+<p>所有路由器都具有全网的拓扑结构图，并且是一致的。相比于 RIP，OSPF 的更新过程收敛的很快。</p>
+<h3 id="3-外部网关协议-bgp"><a class="markdownIt-Anchor" href="#3-外部网关协议-bgp"></a> 3. 外部网关协议 BGP</h3>
+<p>BGP（Border Gateway Protocol，边界网关协议）</p>
+<p>AS 之间的路由选择很困难，主要是由于：</p>
+<ul>
+<li>互联网规模很大；</li>
+<li>各个 AS 内部使用不同的路由选择协议，无法准确定义路径的度量；</li>
+<li>AS 之间的路由选择必须考虑有关的策略，比如有些 AS 不愿意让其它 AS 经过。</li>
+</ul>
+<p>BGP 只能寻找一条比较好的路由，而不是最佳路由。</p>
+<p>每个 AS 都必须配置 BGP 发言人，通过在两个相邻 BGP 发言人之间建立 TCP 连接来交换路由信息。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/network/1551086977310.png!zp"/></div>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/network/network-physical/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/network/network-physical/" class="post-title-link" itemprop="url">计算机网络之物理层</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/network/network-physical/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="network/network-physical/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>936</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计算机网络之物理层"><a class="markdownIt-Anchor" href="#计算机网络之物理层"></a> 计算机网络之物理层</h1>
+<blockquote>
+<p>📦 本文已归档到：「<a href="https://github.com/dunwu/blog" target="_blank" rel="noopener">blog</a>」</p>
+<p><strong>摘要</strong></p>
+<p><strong>物理层（Physical Layer）</strong> - 物理层只接收和发送一串比特(bit)流，不考虑信息的意义和信息结构。</p>
+<ul>
+<li>数据单元：比特流。</li>
+<li>典型设备：光纤、同轴电缆、双绞线、中继器和集线器。</li>
+</ul>
+</blockquote>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B">通信系统模型</a></li>
+<li><a href="#%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F">通信方式</a></li>
+<li><a href="#%E9%80%9A%E4%BF%A1%E4%BF%A1%E5%8F%B7">通信信号</a></li>
+<li><a href="#%E8%B0%83%E5%88%B6%E8%A7%A3%E8%B0%83">调制解调</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%B8%A6%E9%80%9A%E8%B0%83%E5%88%B6%E6%96%B9%E6%B3%95">基本带通调制方法</a></li>
+</ul>
+</li>
+<li><a href="#%E9%80%9A%E4%BF%A1%E5%AA%92%E4%BB%8B">通信媒介</a></li>
+<li><a href="#%E4%BF%A1%E9%81%93%E5%A4%8D%E7%94%A8">信道复用</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="通信系统模型"><a class="markdownIt-Anchor" href="#通信系统模型"></a> 通信系统模型</h2>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/physical/数据通信系统的模型.png!zp"/></div>
+<p>通信系统模型分为三大部分：源系统（包括信源和发送器）、传输系统、目的系统（包括信宿接收器）。</p>
+<p>重要概念：</p>
+<ul>
+<li><strong>信源</strong> - 也叫源点。产生各类信息的实体。</li>
+<li><strong>信道</strong> - 通信的通道，是信号传输的媒介。</li>
+<li><strong>信宿</strong> - 传输信息的归宿。</li>
+<li><strong>码元</strong> - 在数字通信中常常用时间间隔相同的符号来表示一个二进制数字，这样的时间间隔内的信号称为(二进制）码元。</li>
+</ul>
+<h2 id="通信方式"><a class="markdownIt-Anchor" href="#通信方式"></a> 通信方式</h2>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/physical/通信方式.jpg!zp"/></div>
+<p>有三种通信方式：</p>
+<ul>
+<li>单工通信：单向传输</li>
+<li>半双工通信：双向交替传输</li>
+<li>全双工通信：双向同时传输</li>
+</ul>
+<h2 id="通信信号"><a class="markdownIt-Anchor" href="#通信信号"></a> 通信信号</h2>
+<p>通信的目的是传送消息。如语音、文字、图像、视频都是消息。数据时传送消息的实体。信号是数据的电气或电磁的表现。</p>
+<p>模拟信号和数字信号</p>
+<ul>
+<li><strong>模拟信号</strong> - 模拟信号是连续的信号。</li>
+<li><strong>数字信号</strong> - 数字信号是离散的信号。</li>
+</ul>
+<h2 id="调制解调"><a class="markdownIt-Anchor" href="#调制解调"></a> 调制解调</h2>
+<p>重要概念：</p>
+<ul>
+<li><strong>基带信号</strong> - 来自信源的信号叫做基带信号。</li>
+<li><strong>调制</strong> - 将各种数字基带信号转换成适于信道传输的数字调制信号(已调信号或频带信号)。简单来说：调制即，数字 -&gt; 模拟。</li>
+<li><strong>解调</strong> - 在接收端将收到的数字频带信号还原成数字基带信号。简单来说：解调即，模拟 -&gt; 数字。</li>
+</ul>
+<blockquote>
+<p>📌 提示：我们上网时所用到的调制解调器（俗称“猫”），指的就是转换数字和模拟信号的机器。</p>
+</blockquote>
+<p>信号要在信道上传输就要经过调制。</p>
+<p>调制分为：基带调制和带通调制</p>
+<h3 id="基本带通调制方法"><a class="markdownIt-Anchor" href="#基本带通调制方法"></a> 基本带通调制方法</h3>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/physical/基本调制方法.png!zp"/></div>
+<p>如果你收听过广播，一定经常听到 AM、FM 这两个关键词，这是什么意思呢？答案如下：</p>
+<ul>
+<li><strong>调幅（AM）</strong> - 即载波的<strong>振幅</strong>随基带数字信号而变化。</li>
+<li><strong>调频（FM）</strong> - 即载波的<strong>频率</strong>随基带数字信号而变化。</li>
+<li><strong>调相（PM）</strong> - 即载波的<strong>初始相位</strong>随基带数字信号而变化。</li>
+</ul>
+<blockquote>
+<p>📌 提示：我们收听广播时，为了接收不同广播台的信号，就要调整 AM 或 FM，指的就是这里的调制方法。</p>
+</blockquote>
+<h2 id="通信媒介"><a class="markdownIt-Anchor" href="#通信媒介"></a> 通信媒介</h2>
+<p>通信媒介分为两大类：</p>
+<ul>
+<li>导引型 - 双绞线、电缆、光纤</li>
+<li>非导引型 - 无线、红外线、大气、激光</li>
+</ul>
+<h2 id="信道复用"><a class="markdownIt-Anchor" href="#信道复用"></a> 信道复用</h2>
+<p>信道复用就是将用于传输信道的总带宽划分成若干个子频带（或称子信道），每一个子信道传输一路信号。</p>
+<ul>
+<li>频分复用</li>
+<li>时分复用</li>
+<li>波分复用</li>
+<li>码分复用</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/network/network-transport/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/network/network-transport/" class="post-title-link" itemprop="url">计算机网络之传输层</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/network/network-transport/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="network/network-transport/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计算机网络之传输层"><a class="markdownIt-Anchor" href="#计算机网络之传输层"></a> 计算机网络之传输层</h1>
+<blockquote>
+<p>📦 本文已归档到：「<a href="https://github.com/dunwu/blog" target="_blank" rel="noopener">blog</a>」</p>
+<p>网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节，使应用程序看起来像是在两个传输层实体之间有一条端到端的逻辑通信信道。</p>
+</blockquote>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#udp-%E5%92%8C-tcp-%E7%9A%84%E7%89%B9%E7%82%B9">UDP 和 TCP 的特点</a></li>
+<li><a href="#udp-%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F">UDP 首部格式</a></li>
+<li><a href="#tcp-%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F">TCP 首部格式</a></li>
+<li><a href="#tcp-%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B">TCP 的三次握手</a></li>
+<li><a href="#tcp-%E7%9A%84%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B">TCP 的四次挥手</a></li>
+<li><a href="#tcp-%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93">TCP 可靠传输</a></li>
+<li><a href="#tcp-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">TCP 滑动窗口</a></li>
+<li><a href="#tcp-%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6">TCP 流量控制</a></li>
+<li><a href="#tcp-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">TCP 拥塞控制</a>
+<ul>
+<li><a href="#1-%E6%85%A2%E5%BC%80%E5%A7%8B%E4%B8%8E%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D">1. 慢开始与拥塞避免</a></li>
+<li><a href="#2-%E5%BF%AB%E9%87%8D%E4%BC%A0%E4%B8%8E%E5%BF%AB%E6%81%A2%E5%A4%8D">2. 快重传与快恢复</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="udp-和-tcp-的特点"><a class="markdownIt-Anchor" href="#udp-和-tcp-的特点"></a> UDP 和 TCP 的特点</h2>
+<ul>
+<li>
+<p>用户数据报协议 UDP（User Datagram Protocol）是无连接的，尽最大可能交付，没有拥塞控制，面向报文（对于应用程序传下来的报文不合并也不拆分，只是添加 UDP 首部），支持一对一、一对多、多对一和多对多的交互通信。</p>
+</li>
+<li>
+<p>传输控制协议 TCP（Transmission Control Protocol）是面向连接的，提供可靠交付，有流量控制，拥塞控制，提供全双工通信，面向字节流（把应用层传下来的报文看成字节流，把字节流组织成大小不等的数据块），每一条 TCP 连接只能是点对点的（一对一）。</p>
+</li>
+</ul>
+<h2 id="udp-首部格式"><a class="markdownIt-Anchor" href="#udp-首部格式"></a> UDP 首部格式</h2>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/transport/1551092392065.png!zp"/></div>
+<p>首部字段只有 8 个字节，包括源端口、目的端口、长度、检验和。12 字节的伪首部是为了计算检验和临时添加的。</p>
+<h2 id="tcp-首部格式"><a class="markdownIt-Anchor" href="#tcp-首部格式"></a> TCP 首部格式</h2>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/transport/1551092419042.png!zp"/></div>
+<ul>
+<li>
+<p><strong>序号</strong> ：用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。</p>
+</li>
+<li>
+<p><strong>确认号</strong> ：期望收到的下一个报文段的序号。例如 B 正确收到 A 发送来的一个报文段，序号为 501，携带的数据长度为 200 字节，因此 B 期望下一个报文段的序号为 701，B 发送给 A 的确认报文段中确认号就为 701。</p>
+</li>
+<li>
+<p><strong>数据偏移</strong> ：指的是数据部分距离报文段起始处的偏移量，实际上指的是首部的长度。</p>
+</li>
+<li>
+<p><strong>确认 ACK</strong> ：当 ACK=1 时确认号字段有效，否则无效。TCP 规定，在连接建立后所有传送的报文段都必须把 ACK 置 1。</p>
+</li>
+<li>
+<p><strong>同步 SYN</strong> ：在连接建立时用来同步序号。当 SYN=1，ACK=0 时表示这是一个连接请求报文段。若对方同意建立连接，则响应报文中 SYN=1，ACK=1。</p>
+</li>
+<li>
+<p><strong>终止 FIN</strong> ：用来释放一个连接，当 FIN=1 时，表示此报文段的发送方的数据已发送完毕，并要求释放连接。</p>
+</li>
+<li>
+<p><strong>窗口</strong> ：窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。</p>
+</li>
+</ul>
+<h2 id="tcp-的三次握手"><a class="markdownIt-Anchor" href="#tcp-的三次握手"></a> TCP 的三次握手</h2>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/transport/1551092794258.png!zp"/></div>
+<p>假设 A 为客户端，B 为服务器端。</p>
+<ul>
+<li>
+<p>首先 B 处于 LISTEN（监听）状态，等待客户的连接请求。</p>
+</li>
+<li>
+<p>A 向 B 发送连接请求报文，SYN=1，ACK=0，选择一个初始的序号 x。</p>
+</li>
+<li>
+<p>B 收到连接请求报文，如果同意建立连接，则向 A 发送连接确认报文，SYN=1，ACK=1，确认号为 x+1，同时也选择一个初始的序号 y。</p>
+</li>
+<li>
+<p>A 收到 B 的连接确认报文后，还要向 B 发出确认，确认号为 y+1，序号为 x+1。</p>
+</li>
+<li>
+<p>B 收到 A 的确认后，连接建立。</p>
+</li>
+</ul>
+<p><strong>三次握手的原因</strong></p>
+<p>第三次握手是为了防止失效的连接请求到达服务器，让服务器错误打开连接。</p>
+<p>客户端发送的连接请求如果在网络中滞留，那么就会隔很长一段时间才能收到服务器端发回的连接确认。客户端等待一个超时重传时间之后，就会重新请求连接。但是这个滞留的连接请求最后还是会到达服务器，如果不进行三次握手，那么服务器就会打开两个连接。如果有第三次握手，客户端会忽略服务器之后发送的对滞留连接请求的连接确认，不进行第三次握手，因此就不会再次打开连接。</p>
+<h2 id="tcp-的四次挥手"><a class="markdownIt-Anchor" href="#tcp-的四次挥手"></a> TCP 的四次挥手</h2>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/transport/1551092825974.png!zp"/></div>
+<p>以下描述不讨论序号和确认号，因为序号和确认号的规则比较简单。并且不讨论 ACK，因为 ACK 在连接建立之后都为 1。</p>
+<ul>
+<li>
+<p>A 发送连接释放报文，FIN=1。</p>
+</li>
+<li>
+<p>B 收到之后发出确认，此时 TCP 属于半关闭状态，B 能向 A 发送数据但是 A 不能向 B 发送数据。</p>
+</li>
+<li>
+<p>当 B 不再需要连接时，发送连接释放报文，FIN=1。</p>
+</li>
+<li>
+<p>A 收到后发出确认，进入 TIME-WAIT 状态，等待 2 MSL（最大报文存活时间）后释放连接。</p>
+</li>
+<li>
+<p>B 收到 A 的确认后释放连接。</p>
+</li>
+</ul>
+<p><strong>四次挥手的原因</strong></p>
+<p>客户端发送了 FIN 连接释放报文之后，服务器收到了这个报文，就进入了 CLOSE-WAIT 状态。这个状态是为了让服务器端发送还未传送完毕的数据，传送完毕之后，服务器会发送 FIN 连接释放报文。</p>
+<p><strong>TIME_WAIT</strong></p>
+<p>客户端接收到服务器端的 FIN 报文后进入此状态，此时并不是直接进入 CLOSED 状态，还需要等待一个时间计时器设置的时间 2MSL。这么做有两个理由：</p>
+<ul>
+<li>
+<p>确保最后一个确认报文能够到达。如果 B 没收到 A 发送来的确认报文，那么就会重新发送连接释放请求报文，A 等待一段时间就是为了处理这种情况的发生。</p>
+</li>
+<li>
+<p>等待一段时间是为了让本连接持续时间内所产生的所有报文都从网络中消失，使得下一个新的连接不会出现旧的连接请求报文。</p>
+</li>
+</ul>
+<h2 id="tcp-可靠传输"><a class="markdownIt-Anchor" href="#tcp-可靠传输"></a> TCP 可靠传输</h2>
+<p>TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文段在超时时间内没有收到确认，那么就重传这个报文段。</p>
+<p>一个报文段从发送再到接收到确认所经过的时间称为往返时间 RTT，加权平均往返时间 RTTs 计算如下：</p>
+<div align="center"><img src="https://latex.codecogs.com/gif.latex?RTTs=(1-a)*(RTTs)+a*RTT"/></div> <br>
+<p>其中，0 ≤ a ＜ 1，RTTs 随着 a 的增加更容易受到 RTT 的影响。</p>
+<p>超时时间 RTO 应该略大于 RTTs，TCP 使用的超时时间计算如下：</p>
+<div align="center"><img src="https://latex.codecogs.com/gif.latex?RTO=RTTs+4*RTT_d"/></div> <br>
+<p>其中 RTT<sub>d</sub> 为偏差的加权平均值。</p>
+<h2 id="tcp-滑动窗口"><a class="markdownIt-Anchor" href="#tcp-滑动窗口"></a> TCP 滑动窗口</h2>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/transport/1551092841802.png!zp"/></div>
+<p>窗口是缓存的一部分，用来暂时存放字节流。发送方和接收方各有一个窗口，接收方通过 TCP 报文段中的窗口字段告诉发送方自己的窗口大小，发送方根据这个值和其它信息设置自己的窗口大小。</p>
+<p>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。</p>
+<p>接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为 {31, 34, 35}，其中 {31} 按序到达，而 {34, 35} 就不是，因此只对字节 31 进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。</p>
+<h2 id="tcp-流量控制"><a class="markdownIt-Anchor" href="#tcp-流量控制"></a> TCP 流量控制</h2>
+<p>流量控制是为了控制发送方发送速率，保证接收方来得及接收。</p>
+<p>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。</p>
+<h2 id="tcp-拥塞控制"><a class="markdownIt-Anchor" href="#tcp-拥塞控制"></a> TCP 拥塞控制</h2>
+<p>如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接收，而拥塞控制是为了降低整个网络的拥塞程度。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/transport/1551092981695.png!zp"/></div>
+<p>TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、快重传、快恢复。</p>
+<p>发送方需要维护一个叫做拥塞窗口（cwnd）的状态变量，注意拥塞窗口与发送方窗口的区别：拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口。</p>
+<p>为了便于讨论，做如下假设：</p>
+<ul>
+<li>接收方有足够大的接收缓存，因此不会发生流量控制；</li>
+<li>虽然 TCP 的窗口基于字节，但是这里设窗口的大小单位为报文段。</li>
+</ul>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/transport/1551093119265.png!zp"/></div>
+<h3 id="1-慢开始与拥塞避免"><a class="markdownIt-Anchor" href="#1-慢开始与拥塞避免"></a> 1. 慢开始与拥塞避免</h3>
+<p>发送的最初执行慢开始，令 cwnd = 1，发送方只能发送 1 个报文段；当收到确认后，将 cwnd 加倍，因此之后发送方能够发送的报文段数量为：2、4、8 …</p>
+<p>注意到慢开始每个轮次都将 cwnd 加倍，这样会让 cwnd 增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能性也就更高。设置一个慢开始门限 ssthresh，当 cwnd &gt;= ssthresh 时，进入拥塞避免，每个轮次只将 cwnd 加 1。</p>
+<p>如果出现了超时，则令 ssthresh = cwnd / 2，然后重新执行慢开始。</p>
+<h3 id="2-快重传与快恢复"><a class="markdownIt-Anchor" href="#2-快重传与快恢复"></a> 2. 快重传与快恢复</h3>
+<p>在接收方，要求每次接收到报文段都应该对最后一个已收到的有序报文段进行确认。例如已经接收到 M<sub>1</sub> 和 M<sub>2</sub>，此时收到 M<sub>4</sub>，应当发送对 M<sub>2</sub> 的确认。</p>
+<p>在发送方，如果收到三个重复确认，那么可以知道下一个报文段丢失，此时执行快重传，立即重传下一个报文段。例如收到三个 M<sub>2</sub>，则 M<sub>3</sub> 丢失，立即重传 M<sub>3</sub>。</p>
+<p>在这种情况下，只是丢失个别报文段，而不是网络拥塞。因此执行快恢复，令 ssthresh = cwnd / 2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。</p>
+<p>慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/network/transport/1551093167163.png!zp"/></div>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/bigdata/hbase/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/bigdata/hbase/README/" class="post-title-link" itemprop="url">HBase</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/bigdata/hbase/README/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bigdata/hbase/README/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hbase"><a class="markdownIt-Anchor" href="#hbase"></a> HBase</h1>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80">基础</a></li>
+<li><a href="#%E5%8E%9F%E7%90%86">原理</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B">数据模型</a></li>
+<li><a href="#hbase-%E6%9E%B6%E6%9E%84">HBase 架构</a></li>
+</ul>
+</li>
+<li><a href="#hbase-%E5%92%8C-rdbms">HBase 和 RDBMS</a></li>
+<li><a href="#api">API</a></li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a>
+<ul>
+<li><a href="#%E5%91%BD%E4%BB%A4%E8%A1%8C">命令行</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9B%B4%E5%A4%9A%E5%86%85%E5%AE%B9">更多内容</a>
+<ul>
+<li><a href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB">扩展阅读</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
+<p>HBase 是建立在 HDFS 基础上的面向列的分布式数据库。</p>
+<ul>
+<li>HBase 参考了谷歌的 BigTable 建模，实现的编程语言为 Java。</li>
+<li>它是 Hadoop 项目的子项目，运行于 HDFS 文件系统之上。</li>
+</ul>
+<p>HBase 适用场景：实时地随机访问超大数据集。</p>
+<p>在 <a href="https://zh.wikipedia.org/wiki/CAP%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">CAP 理论</a>中，HBase 属于 CP 类型的系统。</p>
+<h2 id="基础"><a class="markdownIt-Anchor" href="#基础"></a> 基础</h2>
+<p><a href="hbase-ops.md">HBase 维护</a></p>
+<h2 id="原理"><a class="markdownIt-Anchor" href="#原理"></a> 原理</h2>
+<h3 id="数据模型"><a class="markdownIt-Anchor" href="#数据模型"></a> 数据模型</h3>
+<p>HBase 是一个面向列的数据库，在表中它由行排序。</p>
+<p>HBase 表模型结构为：</p>
+<ul>
+<li>表（table）是行的集合。</li>
+<li>行（row）是列族的集合。</li>
+<li>列族（column family）是列的集合。</li>
+<li>列（row）是键值对的集合。</li>
+</ul>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/bigdata/hbase/1551164163369.png"/></div>
+<p>HBase 表的单元格（cell）由行和列的坐标交叉决定，是有版本的。默认情况下，版本号是自动分配的，为 HBase 插入单元格时的时间戳。单元格的内容是未解释的字节数组。</p>
+<p>行的键也是未解释的字节数组，所以理论上，任何数据都可以通过序列化表示成字符串或二进制，从而存为 HBase 的键值。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/bigdata/hbase/1551164224778.png"/></div>
+<h3 id="hbase-架构"><a class="markdownIt-Anchor" href="#hbase-架构"></a> HBase 架构</h3>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/bigdata/hbase/1551164744748.png"/></div>
+<p>和 HDFS、YARN 一样，HBase 也采用 master / slave 架构：</p>
+<ul>
+<li>HBase 有一个 master 节点。master 节点负责将区域（region）分配给 region 节点；恢复 region 节点的故障。</li>
+<li>HBase 有多个 region 节点。region 节点负责零个或多个区域（region）的管理并相应客户端的读写请求。region 节点还负责区域的划分并通知 master 节点有了新的子区域。</li>
+</ul>
+<p>HBase 依赖 ZooKeeper 来实现故障恢复。</p>
+<h4 id="regin"><a class="markdownIt-Anchor" href="#regin"></a> Regin</h4>
+<p>HBase 表按行键范围水平自动划分为区域（region）。每个区域由表中行的子集构成。每个区域由它所属的表、它所含的第一行及最后一行来表示。</p>
+<p><strong>区域只不过是表被拆分，并分布在区域服务器。</strong></p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/bigdata/hbase/1551165887616.png"/></div>
+<h4 id="master-服务器"><a class="markdownIt-Anchor" href="#master-服务器"></a> Master 服务器</h4>
+<p>区域分配、DDL(create、delete)操作由 HBase master 服务器处理。</p>
+<ul>
+<li>master 服务器负责协调 region 服务器
+<ul>
+<li>协助区域启动，出现故障恢复或负载均衡情况时，重新分配 region 服务器</li>
+<li>监控集群中的所有 region 服务器</li>
+</ul>
+</li>
+<li>支持 DDL 接口（创建、删除、更新表）</li>
+</ul>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/bigdata/hbase/1551166513572.png"/></div>
+<h4 id="regin-服务器"><a class="markdownIt-Anchor" href="#regin-服务器"></a> Regin 服务器</h4>
+<p>区域服务器运行在 HDFS 数据节点上，具有以下组件</p>
+<ul>
+<li>
+<p><code>WAL</code> - Write Ahead Log 是 HDFS 上的文件。WAL 存储尚未持久存储到永久存储的新数据，它用于在发生故障时进行恢复。</p>
+</li>
+<li>
+<p><code>BlockCache</code> - 是读缓存。它将频繁读取的数据存储在内存中。至少最近使用的数据在完整时被逐出。</p>
+</li>
+<li>
+<p><code>MemStore</code> - 是写缓存。它存储尚未写入磁盘的新数据。在写入磁盘之前对其进行排序。每个区域每个列族有一个 MemStore。</p>
+</li>
+<li>
+<p><code>Hfiles</code> - 将行存储为磁盘上的排序键值对。</p>
+</li>
+</ul>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/bigdata/hbase/1551166602999.png"/></div>
+<h4 id="zookeeper"><a class="markdownIt-Anchor" href="#zookeeper"></a> ZooKeeper</h4>
+<p>HBase 使用 ZooKeeper 作为分布式协调服务来维护集群中的服务器状态。Zookeeper 维护哪些服务器是活动的和可用的，并提供服务器故障通知。集群至少应该有 3 个节点。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/bigdata/hbase/1551166447147.png"/></div>
+<h2 id="hbase-和-rdbms"><a class="markdownIt-Anchor" href="#hbase-和-rdbms"></a> HBase 和 RDBMS</h2>
+<table>
+<thead>
+<tr>
+<th>HBase</th>
+<th>RDBMS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HBase 无模式，它不具有固定列模式的概念;仅定义列族。</td>
+<td>RDBMS 有它的模式，描述表的整体结构的约束。</td>
+</tr>
+<tr>
+<td>它专门创建为宽表。 HBase 是横向扩展。</td>
+<td>这些都是细而专为小表。很难形成规模。</td>
+</tr>
+<tr>
+<td>没有任何事务存在于 HBase。</td>
+<td>RDBMS 是事务性的。</td>
+</tr>
+<tr>
+<td>它反规范化的数据。</td>
+<td>它具有规范化的数据。</td>
+</tr>
+<tr>
+<td>它用于半结构以及结构化数据是非常好的。</td>
+<td>用于结构化数据非常好。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api"><a class="markdownIt-Anchor" href="#api"></a> API</h2>
+<p>Java API 归纳总结在这里：<a href="hbase-api-java.md">Hbase Java API</a></p>
+<h2 id="附录"><a class="markdownIt-Anchor" href="#附录"></a> 附录</h2>
+<h3 id="命令行"><a class="markdownIt-Anchor" href="#命令行"></a> 命令行</h3>
+<p>HBase 命令行可以参考这里：<a href="hbase-cli.md">HBase 命令行</a></p>
+<h2 id="更多内容"><a class="markdownIt-Anchor" href="#更多内容"></a> 更多内容</h2>
+<h3 id="扩展阅读"><a class="markdownIt-Anchor" href="#扩展阅读"></a> 扩展阅读</h3>
+<ul>
+<li><a href="hbase-cli.md">HBase 命令</a></li>
+<li><a href="hbase-ops.md">HBase 配置</a></li>
+</ul>
+<h3 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h3>
+<h4 id="官方"><a class="markdownIt-Anchor" href="#官方"></a> 官方</h4>
+<ul>
+<li><a href="http://hbase.apache.org/" target="_blank" rel="noopener">HBase 官网</a></li>
+<li><a href="https://hbase.apache.org/book.html" target="_blank" rel="noopener">HBase 官方文档</a></li>
+<li><a href="http://abloz.com/hbase/book.html" target="_blank" rel="noopener">HBase 官方文档中文版</a></li>
+<li><a href="https://hbase.apache.org/apidocs/index.html" target="_blank" rel="noopener">HBase API</a></li>
+</ul>
+<h4 id="文章"><a class="markdownIt-Anchor" href="#文章"></a> 文章</h4>
+<ul>
+<li><a href="https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/bigtable-osdi06.pdf" target="_blank" rel="noopener">Bigtable: A Distributed Storage System for Structured Data</a></li>
+<li><a href="https://mapr.com/blog/in-depth-look-hbase-architecture/" target="_blank" rel="noopener">https://mapr.com/blog/in-depth-look-hbase-architecture/</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/bigdata/hbase/hbase-api-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/bigdata/hbase/hbase-api-java/" class="post-title-link" itemprop="url">HBase Java API</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/bigdata/hbase/hbase-api-java/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bigdata/hbase/hbase-api-java/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>160</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hbase-java-api"><a class="markdownIt-Anchor" href="#hbase-java-api"></a> HBase Java API</h1>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#%E6%9B%B4%E5%A4%9A%E5%86%85%E5%AE%B9">更多内容</a>
+<ul>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="更多内容"><a class="markdownIt-Anchor" href="#更多内容"></a> 更多内容</h2>
+<blockquote>
+<p>📦 本文已归档到：「<a href="https://github.com/dunwu/blog" target="_blank" rel="noopener">blog</a>」</p>
+</blockquote>
+<h3 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h3>
+<p><a href="https://blog.csdn.net/jiyiqinlovexx/article/details/36526433" target="_blank" rel="noopener">https://blog.csdn.net/jiyiqinlovexx/article/details/36526433</a><br />
+<a href="https://blog.csdn.net/u010967382/article/details/38046821" target="_blank" rel="noopener">https://blog.csdn.net/u010967382/article/details/38046821</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/bigdata/hbase/hbase-cli/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/bigdata/hbase/hbase-cli/" class="post-title-link" itemprop="url">HBase 命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/bigdata/hbase/hbase-cli/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bigdata/hbase/hbase-cli/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hbase-命令"><a class="markdownIt-Anchor" href="#hbase-命令"></a> HBase 命令</h1>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#1-%E8%BF%9E%E6%8E%A5-hbase">1. 连接 HBase</a></li>
+<li><a href="#2-%E6%9F%A5%E8%AF%A2%E5%B8%AE%E5%8A%A9">2. 查询帮助</a></li>
+<li><a href="#3-%E5%88%9B%E5%BB%BA%E8%A1%A8">3. 创建表</a></li>
+<li><a href="#4-%E6%9F%A5%E7%9C%8B%E8%A1%A8%E4%BF%A1%E6%81%AF">4. 查看表信息</a></li>
+<li><a href="#5-%E6%9F%A5%E7%9C%8B%E8%A1%A8%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF">5. 查看表详细信息</a></li>
+<li><a href="#6-%E5%90%91%E8%A1%A8%E4%B8%AD%E5%86%99%E6%95%B0%E6%8D%AE">6. 向表中写数据</a></li>
+<li><a href="#7-%E6%89%AB%E6%8F%8F%E8%A1%A8">7. 扫描表</a></li>
+<li><a href="#8-%E6%9F%A5%E8%AF%A2-row">8. 查询 row</a></li>
+<li><a href="#9-%E7%A6%81%E7%94%A8%E5%90%AF%E7%94%A8%E8%A1%A8">9. 禁用、启用表</a></li>
+<li><a href="#10-%E5%88%A0%E9%99%A4%E8%A1%A8">10. 删除表</a></li>
+<li><a href="#11-%E5%81%9C%E6%AD%A2-hbase">11. 停止 HBase</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="1-连接-hbase"><a class="markdownIt-Anchor" href="#1-连接-hbase"></a> 1. 连接 HBase</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ./bin/hbase shell</span><br><span class="line">hbase(main):001:0&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-查询帮助"><a class="markdownIt-Anchor" href="#2-查询帮助"></a> 2. 查询帮助</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-创建表"><a class="markdownIt-Anchor" href="#3-创建表"></a> 3. 创建表</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">create <span class="string">'table1'</span>,<span class="string">'columnFamliy1'</span>,<span class="string">'columnFamliy2'</span></span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<p>创建一张名为 table1 的 HBase 表，columnFamliy1、columnFamliy2 是 table1 表的列族。</p>
+<h2 id="4-查看表信息"><a class="markdownIt-Anchor" href="#4-查看表信息"></a> 4. 查看表信息</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">list <span class="string">'table1'</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-查看表详细信息"><a class="markdownIt-Anchor" href="#5-查看表详细信息"></a> 5. 查看表详细信息</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">describe <span class="string">'table1'</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-向表中写数据"><a class="markdownIt-Anchor" href="#6-向表中写数据"></a> 6. 向表中写数据</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">put <span class="string">'table1'</span>, <span class="string">'row1'</span>, <span class="string">'columnFamliy1:a'</span>, <span class="string">'valueA'</span></span><br><span class="line">put <span class="string">'table1'</span>, <span class="string">'row1'</span>, <span class="string">'columnFamliy1:b'</span>, <span class="string">'valueB'</span></span><br><span class="line">put <span class="string">'table1'</span>, <span class="string">'row1'</span>, <span class="string">'columnFamliy1:c'</span>, <span class="string">'valueC'</span></span><br><span class="line"></span><br><span class="line">put <span class="string">'table1'</span>, <span class="string">'row2'</span>, <span class="string">'columnFamliy1:a'</span>, <span class="string">'valueA'</span></span><br><span class="line">put <span class="string">'table1'</span>, <span class="string">'row2'</span>, <span class="string">'columnFamliy1:b'</span>, <span class="string">'valueB'</span></span><br><span class="line">put <span class="string">'table1'</span>, <span class="string">'row2'</span>, <span class="string">'columnFamliy1:c'</span>, <span class="string">'valueC'</span></span><br><span class="line"></span><br><span class="line">put <span class="string">'table1'</span>, <span class="string">'row1'</span>, <span class="string">'columnFamliy2:a'</span>, <span class="string">'valueA'</span></span><br><span class="line">put <span class="string">'table1'</span>, <span class="string">'row1'</span>, <span class="string">'columnFamliy2:b'</span>, <span class="string">'valueB'</span></span><br><span class="line">put <span class="string">'table1'</span>, <span class="string">'row1'</span>, <span class="string">'columnFamliy2:c'</span>, <span class="string">'valueC'</span></span><br></pre></td></tr></table></figure>
+<h2 id="7-扫描表"><a class="markdownIt-Anchor" href="#7-扫描表"></a> 7. 扫描表</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hbase&gt; scan <span class="string">'hbase:meta'</span></span><br><span class="line">hbase&gt; scan <span class="string">'hbase:meta'</span>, &#123;COLUMNS =&gt; <span class="string">'info:regioninfo'</span>&#125;</span><br><span class="line">hbase&gt; scan <span class="string">'ns1:</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;COLUMNS =&gt; ['</span>c1<span class="string">', '</span>c2<span class="string">'], LIMIT =&gt; 10, STARTROW =&gt; '</span>xyz<span class="string">'&#125;</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;COLUMNS =&gt; '</span>c1<span class="string">', TIMERANGE =&gt; [1303668804, 1303668904]&#125;</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;REVERSED =&gt; true&#125;</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;ALL_METRICS =&gt; true&#125;</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;METRICS =&gt; ['</span>RPC_RETRIES<span class="string">', '</span>ROWS_FILTERED<span class="string">']&#125;</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;ROWPREFIXFILTER =&gt; '</span>row2<span class="string">', FILTER =&gt; "</span></span><br><span class="line"><span class="string">  (QualifierFilter (&gt;=, '</span>binary:xyz<span class="string">')) AND (TimestampsFilter ( 123, 456))"&#125;</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;FILTER =&gt;</span></span><br><span class="line"><span class="string">  org.apache.hadoop.hbase.filter.ColumnPaginationFilter.new(1, 0)&#125;</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;CONSISTENCY =&gt; '</span>TIMELINE<span class="string">'&#125;</span></span><br><span class="line"><span class="string">For setting the Operation Attributes </span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123; COLUMNS =&gt; ['</span>c1<span class="string">', '</span>c2<span class="string">'], ATTRIBUTES =&gt; &#123;'</span>mykey<span class="string">' =&gt; '</span>myvalue<span class="string">'&#125;&#125;</span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123; COLUMNS =&gt; ['</span>c1<span class="string">', '</span>c2<span class="string">'], AUTHORIZATIONS =&gt; ['</span>PRIVATE<span class="string">','</span>SECRET<span class="string">']&#125;</span></span><br><span class="line"><span class="string">For experts, there is an additional option -- CACHE_BLOCKS -- which</span></span><br><span class="line"><span class="string">switches block caching for the scanner on (true) or off (false).  By</span></span><br><span class="line"><span class="string">default it is enabled.  Examples:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">hbase&gt; scan '</span>t1<span class="string">', &#123;COLUMNS =&gt; ['</span>c1<span class="string">', '</span>c2<span class="string">'], CACHE_BLOCKS =&gt; false&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="8-查询-row"><a class="markdownIt-Anchor" href="#8-查询-row"></a> 8. 查询 row</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">get <span class="string">'table1'</span>, <span class="string">'row1'</span></span><br><span class="line">get <span class="string">'table1'</span>, <span class="string">'row1'</span>, <span class="string">'columnFamliy1'</span></span><br><span class="line">get <span class="string">'table1'</span>, <span class="string">'row1'</span>, <span class="string">'columnFamliy1:a'</span></span><br></pre></td></tr></table></figure>
+<h2 id="9-禁用-启用表"><a class="markdownIt-Anchor" href="#9-禁用-启用表"></a> 9. 禁用、启用表</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hbase(main):008:0&gt; <span class="built_in">disable</span> <span class="string">'test'</span></span><br><span class="line">0 row(s) <span class="keyword">in</span> 1.1820 seconds</span><br><span class="line"></span><br><span class="line">hbase(main):009:0&gt; <span class="built_in">enable</span> <span class="string">'test'</span></span><br><span class="line">0 row(s) <span class="keyword">in</span> 0.1770 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="10-删除表"><a class="markdownIt-Anchor" href="#10-删除表"></a> 10. 删除表</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hbase(main):011:0&gt; drop <span class="string">'test'</span></span><br><span class="line">0 row(s) <span class="keyword">in</span> 0.1370 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="11-停止-hbase"><a class="markdownIt-Anchor" href="#11-停止-hbase"></a> 11. 停止 HBase</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ./bin/stop-hbase.sh</span><br><span class="line">stopping hbase....................</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/bigdata/hbase/hbase-ops/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/bigdata/hbase/hbase-ops/" class="post-title-link" itemprop="url">HBase 维护</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/bigdata/hbase/hbase-ops/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bigdata/hbase/hbase-ops/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hbase-维护"><a class="markdownIt-Anchor" href="#hbase-维护"></a> HBase 维护</h1>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">配置文件</a></li>
+<li><a href="#%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82">环境要求</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E5%92%8C%E5%BC%95%E7%94%B3">引用和引申</a>
+<ul>
+<li><a href="#%E5%BC%95%E7%94%B3">引申</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="配置文件"><a class="markdownIt-Anchor" href="#配置文件"></a> 配置文件</h2>
+<ul>
+<li><code>backup-masters</code> - 默认情况下不存在。列出主服务器应在其上启动备份主进程的主机，每行一个主机。</li>
+<li><code>hadoop-metrics2-hbase.properties</code> - 用于连接 HBase Hadoop 的 Metrics2 框架。</li>
+<li><code>hbase-env.cmd</code> and <a href="http://hbase-env.sh" target="_blank" rel="noopener">hbase-env.sh</a> - 用于 Windows 和 Linux / Unix 环境的脚本，用于设置 HBase 的工作环境，包括 Java，Java 选项和其他环境变量的位置。</li>
+<li><code>hbase-policy.xml</code> - RPC 服务器用于对客户端请求进行授权决策的默认策略配置文件。仅在启用 HBase 安全性时使用。</li>
+<li><code>hbase-site.xml</code> - 主要的 HBase 配置文件。此文件指定覆盖 HBase 默认配置的配置选项。您可以在 docs / hbase-default.xml 中查看（但不要编辑）默认配置文件。您还可以在 HBase Web UI 的 HBase 配置选项卡中查看群集的整个有效配置（默认值和覆盖）。</li>
+<li><code>log4j.properties</code> - log4j 日志配置。</li>
+<li><code>regionservers</code> - 包含应在 HBase 集群中运行 RegionServer 的主机列表。默认情况下，此文件包含单个条目 localhost。它应包含主机名或 IP 地址列表，每行一个，并且如果群集中的每个节点将在其 localhost 接口上运行 RegionServer，则应仅包含 localhost。</li>
+</ul>
+<h2 id="环境要求"><a class="markdownIt-Anchor" href="#环境要求"></a> 环境要求</h2>
+<ul>
+<li>Java
+<ul>
+<li>HBase 2.0+ 要求 JDK8+</li>
+<li>HBase 1.2+ 要求 JDK7+</li>
+</ul>
+</li>
+<li>SSH - 环境要支持 SSH</li>
+<li>DNS - 环境中要在 hosts 配置本机 hostname 和本机 IP</li>
+<li>NTP - HBase 集群的时间要同步，可以配置统一的 NTP</li>
+<li>平台 - 生产环境不推荐部署在 Windows 系统中</li>
+<li>Hadoop - 依赖 Hadoop 配套版本</li>
+<li>Zookeeper - 依赖 Zookeeper 配套版本</li>
+</ul>
+<h2 id="运行模式"><a class="markdownIt-Anchor" href="#运行模式"></a> 运行模式</h2>
+<h3 id="单点"><a class="markdownIt-Anchor" href="#单点"></a> 单点</h3>
+<p>hbase-site.xml 配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://namenode.example.org:8020/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="分布式"><a class="markdownIt-Anchor" href="#分布式"></a> 分布式</h3>
+<p>hbase-site.xm 配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://namenode.example.org:8020/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>node-a.example.com,node-b.example.com,node-c.example.com<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="引用和引申"><a class="markdownIt-Anchor" href="#引用和引申"></a> 引用和引申</h2>
+<h3 id="扩展阅读"><a class="markdownIt-Anchor" href="#扩展阅读"></a> 扩展阅读</h3>
+<ul>
+<li><a href="http://hbase.apache.org/book.html#configuration" target="_blank" rel="noopener">Apache HBase Configuration</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/bigdata/hdfs/hdfs-cli/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/bigdata/hdfs/hdfs-cli/" class="post-title-link" itemprop="url">HDFS 命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/bigdata/hdfs/hdfs-cli/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bigdata/hdfs/hdfs-cli/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>438</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hdfs-命令"><a class="markdownIt-Anchor" href="#hdfs-命令"></a> HDFS 命令</h1>
+<ul>
+<li>列出目录的内容：</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将文件从本地文件系统加载到HDFS：</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="code"><pre><span class="line"><span class="symbol">$</span> hdfs dfs -<span class="keyword">put</span> songs.txt /user/adam</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从HDFS读取文件内容：</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">$ hdfs dfs -cat <span class="regexp">/user/</span>adam<span class="regexp">/songs.txt</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>更改文件的权限：</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$ hdfs dfs -chmod <span class="number">700</span> /user/adam/songs.txt</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将文件的复制因子设置为4：</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$ hdfs dfs -setrep -w <span class="number">4</span> /user/adam/songs.txt</span><br></pre></td></tr></table></figure>
+<ul>
+<li>检查文件的大小：</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">$ hdfs dfs -du -h /user/adam/songs.txt Create a subdirectory in your <span class="built_in">home</span> directory.</span><br><span class="line">$ hdfs dfs -<span class="built_in">mkdir</span> songs</span><br></pre></td></tr></table></figure>
+<p>注意，相对路径总是引用执行命令的用户的主目录。HDFS上没有“当前”目录的概念（换句话说，没有“CD”命令）：</p>
+<ul>
+<li>
+<p>将文件移到新创建的子目录：</p>
+<p>$ hdfs dfs -mv songs.txt songs</p>
+</li>
+<li>
+<p>从HDFS中删除一个目录：</p>
+<p>$ hdfs dfs -rm -r songs</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/8/">8</a><a class="extend next" rel="next" href="/blog/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Zhang Peng"
+    src="/blog/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhang Peng</p>
+  <div class="site-description" itemprop="description">Dunwu's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dunwu" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;dunwu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:forbreak@163.com" title="E-Mail &amp;rarr; mailto:forbreak@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-paper-plane"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Peng</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">397k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+<script src="/blog/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-ajay4qmfci.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>

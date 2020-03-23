@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="📦 本文已归档到：「blog」  第一次读《重构:改善既有代码的设计》时，我曾整理过一个简单的笔记。最近，因为参与一个重构项目，再一次温习了《重构:改善既有代码的设计》。过程中，萌发了认真总结、整理重构方法的冲动，于是有了这系列文字。 代码的坏味道还有几篇没有完稿，后面我会陆续补充。。。  症与药  对代码的坏味道的思考 “有病要早治，不要放弃治疗”。多么朴素的道理 ，人人都懂。 病，就是不健">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码的坏味道和重构">
+<meta property="og:url" content="https://dunwu.github.io/blog/design/refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93%E5%92%8C%E9%87%8D%E6%9E%84/index.html">
+<meta property="og:site_name" content="Dunwu">
+<meta property="og:description" content="📦 本文已归档到：「blog」  第一次读《重构:改善既有代码的设计》时，我曾整理过一个简单的笔记。最近，因为参与一个重构项目，再一次温习了《重构:改善既有代码的设计》。过程中，萌发了认真总结、整理重构方法的冲动，于是有了这系列文字。 代码的坏味道还有几篇没有完稿，后面我会陆续补充。。。  症与药  对代码的坏味道的思考 “有病要早治，不要放弃治疗”。多么朴素的道理 ，人人都懂。 病，就是不健">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://dunwu.test.upcdn.net/cs/design/refactor/code-smell.png">
+<meta property="article:published_time" content="2018-10-13T14:48:00.000Z">
+<meta property="article:modified_time" content="2020-03-23T15:05:47.472Z">
+<meta property="article:author" content="Zhang Peng">
+<meta property="article:tag" content="设计">
+<meta property="article:tag" content="重构">
+<meta property="article:tag" content="代码坏味道">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://dunwu.test.upcdn.net/cs/design/refactor/code-smell.png">
+
+<link rel="canonical" href="https://dunwu.github.io/blog/design/refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93%E5%92%8C%E9%87%8D%E6%9E%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>代码的坏味道和重构 | Dunwu</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/blog/atom.xml" title="Dunwu" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dunwu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">大道至简，知易行难</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">51</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">77</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/dunwu" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/design/refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93%E5%92%8C%E9%87%8D%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          代码的坏味道和重构<a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93%E5%92%8C%E9%87%8D%E6%9E%84.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-10-13 22:48:00" itemprop="dateCreated datePublished" datetime="2018-10-13T22:48:00+08:00">2018-10-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">设计</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E8%AE%BE%E8%AE%A1/%E9%87%8D%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">重构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/design/refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93%E5%92%8C%E9%87%8D%E6%9E%84/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="design/refactor/代码的坏味道和重构/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>📦 本文已归档到：「<a href="https://github.com/dunwu/blog" target="_blank" rel="noopener">blog</a>」</p>
+</blockquote>
+<p>第一次读《重构:改善既有代码的设计》时，我曾整理过一个简单的笔记。最近，因为参与一个重构项目，再一次温习了《重构:改善既有代码的设计》。过程中，萌发了认真总结、整理重构方法的冲动，于是有了这系列文字。</p>
+<p>代码的坏味道还有几篇没有完稿，后面我会陆续补充。。。</p>
+<h2 id="症与药"><a class="markdownIt-Anchor" href="#症与药"></a> 症与药</h2>
+<h3 id="对代码的坏味道的思考"><a class="markdownIt-Anchor" href="#对代码的坏味道的思考"></a> 对代码的坏味道的思考</h3>
+<p>“有病要早治，不要放弃治疗”。多么朴素的道理 ，人人都懂。</p>
+<p>病，就是不健康。</p>
+<p>人有病，可以通过打针、吃药、做手术来进行治疗。</p>
+<p><strong>如果把代码的坏味道（代码质量问题）比作病症，那么重构就是治疗代码的坏味道的药。</strong></p>
+<p>个人认为，在重构这件事上，也可以应用治病的道理：</p>
+<ul>
+<li>
+<p><strong>防病于未然。</strong><br />
+—— 春秋战国时期的一代名医扁鹊，曾经有个很著名的医学主张：<strong>防病于未然</strong>。 我觉得这个道理应用于软件代码的重构亦然。编程前要有合理的设计、编程时要有良好的编程风格，尽量减少问题。从这个层面上说，了解代码的坏味道，不仅仅是为了发现问题、解决问题。更重要的作用是：指导我们在编程过程中有意识的去规避这些问题。</p>
+</li>
+<li>
+<p><strong>小病不医，易得大病。</strong><br />
+—— 刘备说过：“勿以善小而不为，勿以恶小而为之”。发现问题就及时修改，代码质量自然容易进入良性循环；反之，亦然。要重视积累的力量，别总以为代码出现点小问题，那都不是事儿。</p>
+</li>
+<li>
+<p><strong>对症下药。</strong><br />
+—— 程序出现了问题，要分析出问题的根本，有针对性的制定合理的重构方案。大家都知道吃错药的后果，同样的，<strong>瞎改还不如不改</strong>。</p>
+</li>
+<li>
+<p><strong>忌猛药</strong><br />
+—— 医病用猛药容易产生副作用。换一句俗语：步子大了容易扯着蛋。重构如果大刀阔斧的干，那你就要有随时可能扑街的心理准备。推倒重来不是重构，而是重写。重构应该是循序渐进，步步为营的过程。当你发现重写代码比重构代码更简单，往往说明你早就该重构了。</p>
+</li>
+</ul>
+<h3 id="重构的原则"><a class="markdownIt-Anchor" href="#重构的原则"></a> 重构的原则</h3>
+<p>前面把代码质量问题比作病症，而把重构比作药。这里，我们再进一步讨论一下重构的原则。</p>
+<h4 id="何谓重构what"><a class="markdownIt-Anchor" href="#何谓重构what"></a> 何谓重构(What)</h4>
+<p><code>重构（Refactoring）</code> 的常见定义是：不改变软件系统外部行为的前提下，改善它的内部结构。</p>
+<p>个人觉得这个定义有点生涩。不妨理解为：重构是给代码治病的行为。而代码有病是指代码的质量（可靠性、安全性、可复用性、可维护性）和性能有问题。</p>
+<p><strong>重构的目的是为了提高代码的质量和性能</strong>。</p>
+<p><em>注：功能不全或者不正确，那是残疾代码。就像治病治不了残疾，重构也解决不了功能问题。</em></p>
+<h4 id="为何重构why"><a class="markdownIt-Anchor" href="#为何重构why"></a> 为何重构(Why)</h4>
+<p>翻翻书，上网搜一下，谈到重构的理由大体相同：</p>
+<ul>
+<li>重构改进软件设计</li>
+<li>重构使软件更容易理解</li>
+<li>重构帮助找到 bug</li>
+<li>重构提高编程速度</li>
+</ul>
+<p>总之就是，<strong>重构可以提高代码质量</strong>。</p>
+<h4 id="何时重构when"><a class="markdownIt-Anchor" href="#何时重构when"></a> 何时重构(When)</h4>
+<p>关于何时重构，我先引用一下 <a href="http://mt.sohu.com/20160812/n463980993.shtml" target="_blank" rel="noopener"><u>重构并非难在如何做，而是难在何时开始做</u></a> 一文的观点。</p>
+<blockquote>
+<p>对于一个高速发展的公司来说，停止业务开发，专门来做重构项目，<strong>从来就不是一个可接受的选项</strong>，“边开飞机边换引擎”才是这种公司想要的。</p>
+</blockquote>
+<p>我们不妨来衡量一下重构的成本和收益。</p>
+<ul>
+<li>
+<p><strong>重构的成本</strong></p>
+<p>重构是有成本的，费时费力（时间、人力）不说，还有可能会使本来正常运行的程序出错。所以，很多人都抱着“不求有功，但求无过”的心理得过且过。</p>
+<p>还有一种成本：重构使用较新且较为复杂的技术，学习曲线不平滑，团队成员技术切换困难，短期内开发效率可能不升反降。</p>
+<p>但是，如果一直放任代码腐朽下去，技术债务会越来越沉重。当代码最终快要跑不动时，架构师们往往还是不得不使用激进的手段来治疗代码的顽疾。但是，这个过程通常都是非常痛苦的，而且有着很高的失败风险。</p>
+</li>
+<li>
+<p><strong>重构的收益</strong></p>
+<p>重构的收益是提高代码的质量和性能，并提高未来的开发效率。但是，应当看到，重构往往并不能在短期内带来实际的效益，或者很难直观看出效益。而对于一个企业来说，没有什么比效益更重要。换句话说，没有实际效益的事，通常也没有价值。很多领导，尤其是非技术方向的领导，并不关心你应用了什么新技术，让代码变得多么优雅等等。</p>
+</li>
+<li>
+<p><strong>重构的合适时机</strong></p>
+<p>从以上来看，重构实在是个吃力不讨好的事情。</p>
+<p>于是，很多人屈服于万恶的 KPI 和要命的 deadline，一边吐槽着以前的代码是垃圾，一边自己也在造垃圾。</p>
+<p>但是，**重构本应该是个渐进式的过程，不是只有伤筋动骨的改造才叫重构。**如果非要等到代码已经烂到病入膏肓，再使用激进方式来重构，那必然是困难重重，风险极高。</p>
+<p>《重构》书中提到的重构时机应该在添加功能、修复功能、审查代码时，不建议专门抽出时间专门做重构项目。</p>
+<p>我认为，其思想就是指：<strong>重构应该是在开发过程中实时的、渐进的演化过程。</strong></p>
+</li>
+<li>
+<p><strong>重构的不恰当时机</strong></p>
+<p>但是，这里我也要强调一下：<strong>不是所有软件开发过程都一定要重构。</strong></p>
+<p>较能<strong>凸显重构价值的场景</strong>是：代码规模较大、生命周期还较长、承担了较多责任、有一个较大（且较不稳定，人员流动频繁）团队在其上工作的单一代码库。</p>
+<p>与之相反，有一些场景的重构价值就很小：</p>
+<ul>
+<li>代码库生命周期快要走到尾声，开发逐渐减少，以维护为主。</li>
+<li>代码库当前版本马上要发布了，这时重构无疑是给自己找麻烦。</li>
+<li>重构代价过于沉重：重构后功能的正确性、稳定性难以保障；技术过于超前，团队成员技术迁移难度太大。</li>
+</ul>
+</li>
+</ul>
+<h4 id="如何重构how"><a class="markdownIt-Anchor" href="#如何重构how"></a> 如何重构(How)</h4>
+<p>重构行为在我看来，也是可以分层级的。由高到低，越高层级难度越大：</p>
+<ul>
+<li>
+<p>服务、数据库<br />
+现代软件往往业务复杂、庞大。使用微服务、数据迁移来拆分业务，降低业务复杂度成为了主流。但是，这些技术的测试、部署复杂，技术难度很高。</p>
+</li>
+<li>
+<p>组件、模块、框架<br />
+组件、模块、框架的重构，主要是针对代码的设计问题。解决的是代码的整体结构问题。需要对框架、设计模式、分布式、并发等等有足够的了解。</p>
+</li>
+<li>
+<p>类、接口、函数、字段<br />
+《重构》一书提到了**“代码的坏味道”**以及相关的重构方法。这些都是对类、接口、函数、字段级别代码的重构手段。由于这一级别的重构方法较为简单，所以可操作性较强。具体细节可以阅读《代码的坏味道》篇章。</p>
+</li>
+</ul>
+<p>前两种层级的重构已经涉及到架构层面，影响较大，难度较高，如果功力不够不要轻易变动。由于这两个层级涉及领域较广，这里不做论述。</p>
+<p><u>***此处为分割线。下面是代码的坏味道系列。。。***</u></p>
+<h2 id="代码的坏味道"><a class="markdownIt-Anchor" href="#代码的坏味道"></a> 代码的坏味道</h2>
+<p>《重构:改善既有代码的设计》中介绍了 22 种代码的坏味道以及重构手法。这些坏味道可以进一步归类。我总觉得将事物分类有助于理解和记忆。所以本系列将坏味道按照特性分类，然后逐一讲解。</p>
+<div align="center"><img src="http://dunwu.test.upcdn.net/cs/design/refactor/code-smell.png"/></div>
+<h3 id="代码坏味道之代码臃肿"><a class="markdownIt-Anchor" href="#代码坏味道之代码臃肿"></a> 代码坏味道之代码臃肿</h3>
+<blockquote>
+<p><strong><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E4%BB%A3%E7%A0%81%E8%87%83%E8%82%BF.md" target="_blank" rel="noopener">代码臃肿(Bloated)</a>这组坏味道意味着：代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。</strong></p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E4%BB%A3%E7%A0%81%E8%87%83%E8%82%BF.md#%E8%BF%87%E9%95%BF%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">过长函数</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E4%BB%A3%E7%A0%81%E8%87%83%E8%82%BF.md#%E8%BF%87%E5%A4%A7%E7%9A%84%E7%B1%BB" target="_blank" rel="noopener">过大的类</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E4%BB%A3%E7%A0%81%E8%87%83%E8%82%BF.md#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%81%8F%E6%89%A7" target="_blank" rel="noopener">基本类型偏执</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E4%BB%A3%E7%A0%81%E8%87%83%E8%82%BF.md#%E8%BF%87%E9%95%BF%E5%8F%82%E6%95%B0%E5%88%97" target="_blank" rel="noopener">过长参数列</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E4%BB%A3%E7%A0%81%E8%87%83%E8%82%BF.md#%E6%95%B0%E6%8D%AE%E6%B3%A5%E5%9B%A2" target="_blank" rel="noopener">数据泥团</a></li>
+</ul>
+<h3 id="代码坏味道之滥用面向对象"><a class="markdownIt-Anchor" href="#代码坏味道之滥用面向对象"></a> 代码坏味道之滥用面向对象</h3>
+<blockquote>
+<p><strong><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E6%BB%A5%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md" target="_blank" rel="noopener">滥用面向对象(Object-Orientation Abusers)</a>这组坏味道意味着：代码部分或完全地违背了面向对象编程原则。</strong></p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E6%BB%A5%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md#switch-%E5%A3%B0%E6%98%8E" target="_blank" rel="noopener">switch 声明</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E6%BB%A5%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md#%E4%B8%B4%E6%97%B6%E5%AD%97%E6%AE%B5" target="_blank" rel="noopener">临时字段</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E6%BB%A5%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md#%E8%A2%AB%E6%8B%92%E7%BB%9D%E7%9A%84%E9%A6%88%E8%B5%A0" target="_blank" rel="noopener">被拒绝的馈赠</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E6%BB%A5%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md#%E5%BC%82%E6%9B%B2%E5%90%8C%E5%B7%A5%E7%9A%84%E7%B1%BB" target="_blank" rel="noopener">异曲同工的类</a></li>
+</ul>
+<h3 id="代码坏味道之变革的障碍"><a class="markdownIt-Anchor" href="#代码坏味道之变革的障碍"></a> 代码坏味道之变革的障碍</h3>
+<blockquote>
+<p><strong><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E5%8F%98%E9%9D%A9%E7%9A%84%E9%9A%9C%E7%A2%8D.md" target="_blank" rel="noopener">变革的障碍(Change Preventers)</a>这组坏味道意味着：当你需要改变一处代码时，却发现不得不改变其他的地方。这使得程序开发变得复杂、代价高昂。</strong></p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E5%8F%98%E9%9D%A9%E7%9A%84%E9%9A%9C%E7%A2%8D.md#%E5%8F%91%E6%95%A3%E5%BC%8F%E5%8F%98%E5%8C%96" target="_blank" rel="noopener">发散式变化</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E5%8F%98%E9%9D%A9%E7%9A%84%E9%9A%9C%E7%A2%8D.md#%E9%9C%B0%E5%BC%B9%E5%BC%8F%E4%BF%AE%E6%94%B9" target="_blank" rel="noopener">霰弹式修改</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E5%8F%98%E9%9D%A9%E7%9A%84%E9%9A%9C%E7%A2%8D.md#%E5%B9%B3%E8%A1%8C%E7%BB%A7%E6%89%BF%E4%BD%93%E7%B3%BB" target="_blank" rel="noopener">平行继承体系</a></li>
+</ul>
+<h3 id="代码坏味道之非必要的"><a class="markdownIt-Anchor" href="#代码坏味道之非必要的"></a> 代码坏味道之非必要的</h3>
+<blockquote>
+<p><strong><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84.md" target="_blank" rel="noopener">非必要的(Dispensables)</a>这组坏味道意味着：这样的代码可有可无，它的存在反而影响整体代码的整洁和可读性。</strong></p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84.md#%E8%BF%87%E5%A4%9A%E7%9A%84%E6%B3%A8%E9%87%8A" target="_blank" rel="noopener">过多的注释</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84.md#%E9%87%8D%E5%A4%8D%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">重复代码</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84.md#%E5%86%97%E4%BD%99%E7%B1%BB" target="_blank" rel="noopener">冗余类</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84.md#%E7%BA%AF%E7%A8%9A%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB" target="_blank" rel="noopener">纯稚的数据类</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84.md#%E5%A4%B8%E5%A4%B8%E5%85%B6%E8%B0%88%E6%9C%AA%E6%9D%A5%E6%80%A7" target="_blank" rel="noopener">夸夸其谈未来性</a></li>
+</ul>
+<h3 id="代码坏味道之耦合"><a class="markdownIt-Anchor" href="#代码坏味道之耦合"></a> 代码坏味道之耦合</h3>
+<blockquote>
+<p><strong><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E8%80%A6%E5%90%88.md" target="_blank" rel="noopener">耦合(Couplers)</a>这组坏味道意味着：不同类之间过度耦合。</strong></p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E8%80%A6%E5%90%88.md#%E4%BE%9D%E6%81%8B%E6%83%85%E7%BB%93" target="_blank" rel="noopener">依恋情结</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E8%80%A6%E5%90%88.md#%E7%8B%8E%E6%98%B5%E5%85%B3%E7%B3%BB" target="_blank" rel="noopener">狎昵关系</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E8%80%A6%E5%90%88.md#%E8%BF%87%E5%BA%A6%E8%80%A6%E5%90%88%E7%9A%84%E6%B6%88%E6%81%AF%E9%93%BE" target="_blank" rel="noopener">过度耦合的消息链</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E8%80%A6%E5%90%88.md#%E4%B8%AD%E9%97%B4%E4%BA%BA" target="_blank" rel="noopener">中间人</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E8%80%A6%E5%90%88.md#%E4%B8%8D%E5%AE%8C%E7%BE%8E%E7%9A%84%E5%BA%93%E7%B1%BB" target="_blank" rel="noopener">不完美的库类</a></li>
+</ul>
+<h2 id="扩展阅读"><a class="markdownIt-Anchor" href="#扩展阅读"></a> 扩展阅读</h2>
+<ul>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/" target="_blank" rel="noopener">代码的坏味道和重构</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E4%BB%A3%E7%A0%81%E8%87%83%E8%82%BF.md" target="_blank" rel="noopener">代码坏味道之代码臃肿</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E6%BB%A5%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md" target="_blank" rel="noopener">代码坏味道之滥用面向对象</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E5%8F%98%E9%9D%A9%E7%9A%84%E9%9A%9C%E7%A2%8D.md" target="_blank" rel="noopener">代码坏味道之变革的障碍</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84.md" target="_blank" rel="noopener">代码坏味道之非必要的</a></li>
+<li><a href="https://github.com/dunwu/blog/blob/master/source/_posts/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E8%80%A6%E5%90%88.md" target="_blank" rel="noopener">代码坏味道之耦合</a></li>
+</ul>
+<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
+<ul>
+<li><a href="https://book.douban.com/subject/4262627/" target="_blank" rel="noopener">重构——改善既有代码的设计</a> - by Martin Fowler</li>
+<li><a href="https://sourcemaking.com/refactoring" target="_blank" rel="noopener">https://sourcemaking.com/refactoring</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Zhang Peng
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://dunwu.github.io/blog/design/refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93%E5%92%8C%E9%87%8D%E6%9E%84/" title="代码的坏味道和重构">https://dunwu.github.io/blog/design/refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93%E5%92%8C%E9%87%8D%E6%9E%84/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E8%AE%BE%E8%AE%A1/" rel="tag"># 设计</a>
+              <a href="/blog/tags/%E9%87%8D%E6%9E%84/" rel="tag"># 重构</a>
+              <a href="/blog/tags/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93/" rel="tag"># 代码坏味道</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/blog/bigdata/Flume/" rel="next" title="Flume">
+                  <i class="fa fa-chevron-left"></i> Flume
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/blog/design/refactor/%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E4%B9%8B%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84/" rel="prev" title="代码坏味道之非必要的">
+                  代码坏味道之非必要的 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#症与药"><span class="nav-text"> 症与药</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对代码的坏味道的思考"><span class="nav-text"> 对代码的坏味道的思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重构的原则"><span class="nav-text"> 重构的原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#何谓重构what"><span class="nav-text"> 何谓重构(What)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为何重构why"><span class="nav-text"> 为何重构(Why)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#何时重构when"><span class="nav-text"> 何时重构(When)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何重构how"><span class="nav-text"> 如何重构(How)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码的坏味道"><span class="nav-text"> 代码的坏味道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码坏味道之代码臃肿"><span class="nav-text"> 代码坏味道之代码臃肿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码坏味道之滥用面向对象"><span class="nav-text"> 代码坏味道之滥用面向对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码坏味道之变革的障碍"><span class="nav-text"> 代码坏味道之变革的障碍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码坏味道之非必要的"><span class="nav-text"> 代码坏味道之非必要的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码坏味道之耦合"><span class="nav-text"> 代码坏味道之耦合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展阅读"><span class="nav-text"> 扩展阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-text"> 参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Zhang Peng"
+    src="/blog/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhang Peng</p>
+  <div class="site-description" itemprop="description">Dunwu's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dunwu" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;dunwu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:forbreak@163.com" title="E-Mail &amp;rarr; mailto:forbreak@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-paper-plane"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Peng</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">397k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+<script src="/blog/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-ajay4qmfci.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://dunwu.github.io/blog/design/refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93%E5%92%8C%E9%87%8D%E6%9E%84/",
+            identifier: "design/refactor/代码的坏味道和重构/",
+            title: "代码的坏味道和重构"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://blog-ajay4qmfci.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>

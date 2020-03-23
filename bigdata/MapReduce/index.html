@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="MapReduce   MapReduce 简介  概念 思想 特点 适用场景 不适用场景   MapReduce 原理  Job &amp; Task（作业与任务） Split（切片） Map 阶段（映射） Reduce 阶段（化简） Shuffle 阶段（洗牌）   Shuffle 详解  Map 端 Reduce 端   作业运行模式  JobTracker&#x2F;TaskTracker 模式（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MapReduce">
+<meta property="og:url" content="https://dunwu.github.io/blog/bigdata/MapReduce/index.html">
+<meta property="og:site_name" content="Dunwu">
+<meta property="og:description" content="MapReduce   MapReduce 简介  概念 思想 特点 适用场景 不适用场景   MapReduce 原理  Job &amp; Task（作业与任务） Split（切片） Map 阶段（映射） Reduce 阶段（化简） Shuffle 阶段（洗牌）   Shuffle 详解  Map 端 Reduce 端   作业运行模式  JobTracker&#x2F;TaskTracker 模式（">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-09-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-23T15:05:47.468Z">
+<meta property="article:author" content="Zhang Peng">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hadoop">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://dunwu.github.io/blog/bigdata/MapReduce/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MapReduce | Dunwu</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/blog/atom.xml" title="Dunwu" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dunwu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">大道至简，知易行难</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">51</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">77</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/dunwu" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/bigdata/MapReduce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          MapReduce<a href="https://github.com/dunwu/blog/blob/master/source/_posts/bigdata/MapReduce.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-03T00:00:00+08:00">2018-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/bigdata/MapReduce/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="bigdata/MapReduce/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="mapreduce"><a class="markdownIt-Anchor" href="#mapreduce"></a> MapReduce</h1>
+<!-- TOC depthFrom:2 depthTo:3 -->
+<ul>
+<li><a href="#mapreduce-%E7%AE%80%E4%BB%8B">MapReduce 简介</a>
+<ul>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#%E6%80%9D%E6%83%B3">思想</a></li>
+<li><a href="#%E7%89%B9%E7%82%B9">特点</a></li>
+<li><a href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">适用场景</a></li>
+<li><a href="#%E4%B8%8D%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">不适用场景</a></li>
+</ul>
+</li>
+<li><a href="#mapreduce-%E5%8E%9F%E7%90%86">MapReduce 原理</a>
+<ul>
+<li><a href="#job--task%E4%BD%9C%E4%B8%9A%E4%B8%8E%E4%BB%BB%E5%8A%A1">Job &amp; Task（作业与任务）</a></li>
+<li><a href="#split%E5%88%87%E7%89%87">Split（切片）</a></li>
+<li><a href="#map-%E9%98%B6%E6%AE%B5%E6%98%A0%E5%B0%84">Map 阶段（映射）</a></li>
+<li><a href="#reduce-%E9%98%B6%E6%AE%B5%E5%8C%96%E7%AE%80">Reduce 阶段（化简）</a></li>
+<li><a href="#shuffle-%E9%98%B6%E6%AE%B5%E6%B4%97%E7%89%8C">Shuffle 阶段（洗牌）</a></li>
+</ul>
+</li>
+<li><a href="#shuffle-%E8%AF%A6%E8%A7%A3">Shuffle 详解</a>
+<ul>
+<li><a href="#map-%E7%AB%AF">Map 端</a></li>
+<li><a href="#reduce-%E7%AB%AF">Reduce 端</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%9C%E4%B8%9A%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F">作业运行模式</a>
+<ul>
+<li><a href="#jobtrackertasktracker-%E6%A8%A1%E5%BC%8Fhadoop-1x">JobTracker/TaskTracker 模式（Hadoop 1.X）</a></li>
+<li><a href="#yarn-%E6%A8%A1%E5%BC%8Fhadoop-2x">YARN 模式（Hadoop 2.X）</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="mapreduce-简介"><a class="markdownIt-Anchor" href="#mapreduce-简介"></a> MapReduce 简介</h2>
+<h3 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h3>
+<p>MapReduce 是一个面向批处理的分布式计算框架。</p>
+<p>编程模型：MapReduce 程序被分为 Map（映射）阶段和 Reduce（化简）阶段。</p>
+<h3 id="思想"><a class="markdownIt-Anchor" href="#思想"></a> 思想</h3>
+<p>分而治之，并行计算<br />
+移动计算，而非移动数据</p>
+<h3 id="特点"><a class="markdownIt-Anchor" href="#特点"></a> 特点</h3>
+<ul>
+<li>计算跟着数据走</li>
+<li>良好的扩展性：计算能力随着节点数增加，近似线性递增</li>
+<li>高容错</li>
+<li>状态监控</li>
+<li>适合海量数据的离线批处理</li>
+<li>降低了分布式编程的门槛</li>
+</ul>
+<h3 id="适用场景"><a class="markdownIt-Anchor" href="#适用场景"></a> 适用场景</h3>
+<ul>
+<li>数据统计，如：网站的 PV、UV 统计</li>
+<li>搜索引擎构建索引</li>
+<li>海量数据查询</li>
+</ul>
+<h3 id="不适用场景"><a class="markdownIt-Anchor" href="#不适用场景"></a> 不适用场景</h3>
+<ul>
+<li>OLAP
+<ul>
+<li>要求毫秒或秒级返回结果</li>
+</ul>
+</li>
+<li>流计算
+<ul>
+<li>流计算的输入数据集是动态的，而 MapReduce 是静态的</li>
+</ul>
+</li>
+<li>DAG 计算
+<ul>
+<li>多个作业存在依赖关系，后一个的输入是前一个的输出，构成有向无环图 DAG</li>
+<li>每个 MapReduce 作业的输出结果都会落盘，造成大量磁盘 IO，导致性能非常低下</li>
+</ul>
+</li>
+</ul>
+<h2 id="mapreduce-原理"><a class="markdownIt-Anchor" href="#mapreduce-原理"></a> MapReduce 原理</h2>
+<h3 id="job-task作业与任务"><a class="markdownIt-Anchor" href="#job-task作业与任务"></a> Job &amp; Task（作业与任务）</h3>
+<ul>
+<li>作业是客户端请求执行的一个工作单元
+<ul>
+<li>包括输入数据、MapReduce 程序、配置信息</li>
+</ul>
+</li>
+<li>任务是将作业分解后得到的细分工作单元
+<ul>
+<li>分为 Map 任务和 Reduce 任务</li>
+</ul>
+</li>
+</ul>
+<h3 id="split切片"><a class="markdownIt-Anchor" href="#split切片"></a> Split（切片）</h3>
+<ul>
+<li>输入数据被划分成等长的小数据块，称为输入切片（Input Split），简称切片</li>
+<li>Split 是逻辑概念，仅包含元数据信息，如：数据的起始位置、长度、所在节点等</li>
+<li>每个 Split 交给一个 Map 任务处理，Split 的数量决定 Map 任务的数量</li>
+<li>Split 的划分方式由程序设定，Split 与 HDFS Block 没有严格的对应关系</li>
+<li>Split 的大小默认等于 Block 大小</li>
+<li>Split 越小，负载越均衡，但集群的开销越大</li>
+</ul>
+<h3 id="map-阶段映射"><a class="markdownIt-Anchor" href="#map-阶段映射"></a> Map 阶段（映射）</h3>
+<ul>
+<li>由若干 Map 任务组成，任务数量由 Split 数量决定</li>
+<li>输入：Split 切片（key-value），输出：中间计算结果（key-value）</li>
+</ul>
+<h3 id="reduce-阶段化简"><a class="markdownIt-Anchor" href="#reduce-阶段化简"></a> Reduce 阶段（化简）</h3>
+<ul>
+<li>由若干 Reduce 任务组成，任务数量由程序指定</li>
+<li>输入：Map 阶段输出的中间结果（key-value），输出：最终结果（key-value）</li>
+</ul>
+<h3 id="shuffle-阶段洗牌"><a class="markdownIt-Anchor" href="#shuffle-阶段洗牌"></a> Shuffle 阶段（洗牌）</h3>
+<ul>
+<li>Map、Reduce 阶段的中间环节，负责执行 Partition（分区）、Sort（排序）、Spill（溢写）、Merge（合并）、抓取（Fetch）等工作</li>
+<li>Partition 决定了 Map 任务输出的每条数据放入哪个分区，交给哪个 Reduce 任务处理</li>
+<li>Reduce 任务的数量决定了 Partition 数量</li>
+<li>Partition 编号 = Reduce 任务编号 =“key hashcode % reduce task number”</li>
+<li>避免和减少 Shuffle 是 MapReduce 程序调优的重点</li>
+</ul>
+<h2 id="shuffle-详解"><a class="markdownIt-Anchor" href="#shuffle-详解"></a> Shuffle 详解</h2>
+<h3 id="map-端"><a class="markdownIt-Anchor" href="#map-端"></a> Map 端</h3>
+<p>Map 任务将中间结果写入专用内存缓冲区 Buffer（默认 100M），同时进行 Partition 和 Sort（先按“key hashcode % reduce task number”对数据进行分区，分区内再按 key 排序）<br />
+当 Buffer 的数据量达到阈值（默认 80%）时，将数据溢写（Spill）到磁盘的一个临时文件中，文件内数据先分区后排序<br />
+Map 任务结束前，将多个临时文件合并（Merge）为一个 Map 输出文件，文件内数据先分区后排序</p>
+<h3 id="reduce-端"><a class="markdownIt-Anchor" href="#reduce-端"></a> Reduce 端</h3>
+<p>Reduce 任务从多个 Map 输出文件中主动抓取（Fetch）属于自己的分区数据，先写入 Buffer，数据量达到阈值后，溢写到磁盘的一个临时文件中<br />
+数据抓取完成后，将多个临时文件合并为一个 Reduce 输入文件，文件内数据按 key 排序</p>
+<h2 id="作业运行模式"><a class="markdownIt-Anchor" href="#作业运行模式"></a> 作业运行模式</h2>
+<h3 id="jobtrackertasktracker-模式hadoop-1x"><a class="markdownIt-Anchor" href="#jobtrackertasktracker-模式hadoop-1x"></a> JobTracker/TaskTracker 模式（Hadoop 1.X）</h3>
+<p><strong>JobTracker 节点（Master）</strong></p>
+<ul>
+<li>调度任务在 TaskTracker 上运行</li>
+<li>若任务失败，指定新 TaskTracker 重新运行</li>
+</ul>
+<p><strong>TaskTracker 节点（Slave）</strong></p>
+<ul>
+<li>执行任务，发送进度报告</li>
+</ul>
+<p><strong>存在的问题</strong></p>
+<ul>
+<li>JobTracker 存在单点故障</li>
+<li>JobTracker 负载太重（上限 4000 节点）</li>
+<li>JobTracker 缺少对资源的全面管理</li>
+<li>TaskTracker 对资源的描述过于简单</li>
+<li>源码很难理解</li>
+</ul>
+<h3 id="yarn-模式hadoop-2x"><a class="markdownIt-Anchor" href="#yarn-模式hadoop-2x"></a> YARN 模式（Hadoop 2.X）</h3>
+<ul>
+<li>提交作业</li>
+<li>查看作业</li>
+<li>终止作业</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Zhang Peng
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://dunwu.github.io/blog/bigdata/MapReduce/" title="MapReduce">https://dunwu.github.io/blog/bigdata/MapReduce/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"># 大数据</a>
+              <a href="/blog/tags/Hadoop/" rel="tag"># Hadoop</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/blog/bigdata/Spark/" rel="next" title="Spark">
+                  <i class="fa fa-chevron-left"></i> Spark
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/blog/bigdata/HDFS/" rel="prev" title="HDFS">
+                  HDFS <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mapreduce"><span class="nav-text"> MapReduce</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mapreduce-简介"><span class="nav-text"> MapReduce 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-text"> 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思想"><span class="nav-text"> 思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-text"> 特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景"><span class="nav-text"> 适用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不适用场景"><span class="nav-text"> 不适用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mapreduce-原理"><span class="nav-text"> MapReduce 原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#job-task作业与任务"><span class="nav-text"> Job &amp; Task（作业与任务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#split切片"><span class="nav-text"> Split（切片）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map-阶段映射"><span class="nav-text"> Map 阶段（映射）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce-阶段化简"><span class="nav-text"> Reduce 阶段（化简）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shuffle-阶段洗牌"><span class="nav-text"> Shuffle 阶段（洗牌）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shuffle-详解"><span class="nav-text"> Shuffle 详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#map-端"><span class="nav-text"> Map 端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce-端"><span class="nav-text"> Reduce 端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业运行模式"><span class="nav-text"> 作业运行模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jobtrackertasktracker-模式hadoop-1x"><span class="nav-text"> JobTracker&#x2F;TaskTracker 模式（Hadoop 1.X）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yarn-模式hadoop-2x"><span class="nav-text"> YARN 模式（Hadoop 2.X）</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Zhang Peng"
+    src="/blog/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhang Peng</p>
+  <div class="site-description" itemprop="description">Dunwu's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dunwu" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;dunwu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:forbreak@163.com" title="E-Mail &amp;rarr; mailto:forbreak@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-paper-plane"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Peng</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">397k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+<script src="/blog/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-ajay4qmfci.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://dunwu.github.io/blog/bigdata/MapReduce/",
+            identifier: "bigdata/MapReduce/",
+            title: "MapReduce"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://blog-ajay4qmfci.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>

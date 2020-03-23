@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="分布式存储基本原理  📦 本文已归档到：「blog」   1. 分区规则 分布式数据库 首先要解决把 整个数据集 按照 分区规则 映射到 多个节点 的问题，即把 数据集 划分到 多个节点 上，每个节点负责 整体数据 的一个 子集。    数据分布通常有 哈希分区 和 顺序分区 两种方式，对比如下：    分区方式 特点 相关产品     哈希分区 离散程度好，数据分布与业务无关，无法顺序访问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式存储基本原理">
+<meta property="og:url" content="https://dunwu.github.io/blog/distributed/distributed-storage-theory/index.html">
+<meta property="og:site_name" content="Dunwu">
+<meta property="og:description" content="分布式存储基本原理  📦 本文已归档到：「blog」   1. 分区规则 分布式数据库 首先要解决把 整个数据集 按照 分区规则 映射到 多个节点 的问题，即把 数据集 划分到 多个节点 上，每个节点负责 整体数据 的一个 子集。    数据分布通常有 哈希分区 和 顺序分区 两种方式，对比如下：    分区方式 特点 相关产品     哈希分区 离散程度好，数据分布与业务无关，无法顺序访问">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://dunwu.test.upcdn.net/cs/design/architecture/partition-rule.png!zp">
+<meta property="og:image" content="http://dunwu.test.upcdn.net/cs/design/architecture/partition-hash-mod.png!zp">
+<meta property="og:image" content="http://dunwu.test.upcdn.net/cs/design/architecture/partition-consistent-hash.png!zp">
+<meta property="og:image" content="http://dunwu.test.upcdn.net/cs/design/architecture/partition-hash-slot.png!zp">
+<meta property="article:published_time" content="2019-08-21T03:30:00.000Z">
+<meta property="article:modified_time" content="2020-03-23T15:05:47.472Z">
+<meta property="article:author" content="Zhang Peng">
+<meta property="article:tag" content="分布式">
+<meta property="article:tag" content="存储">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://dunwu.test.upcdn.net/cs/design/architecture/partition-rule.png!zp">
+
+<link rel="canonical" href="https://dunwu.github.io/blog/distributed/distributed-storage-theory/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>分布式存储基本原理 | Dunwu</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/blog/atom.xml" title="Dunwu" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dunwu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">大道至简，知易行难</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">51</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">77</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/dunwu" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dunwu.github.io/blog/blog/distributed/distributed-storage-theory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Zhang Peng">
+      <meta itemprop="description" content="Dunwu's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dunwu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          分布式存储基本原理<a href="https://github.com/dunwu/blog/blob/master/source/_posts/distributed/distributed-storage-theory.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-21 11:30:00" itemprop="dateCreated datePublished" datetime="2019-08-21T11:30:00+08:00">2019-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 23:05:47" itemprop="dateModified" datetime="2020-03-23T23:05:47+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/distributed/distributed-storage-theory/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="distributed/distributed-storage-theory/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="分布式存储基本原理"><a class="markdownIt-Anchor" href="#分布式存储基本原理"></a> 分布式存储基本原理</h1>
+<blockquote>
+<p>📦 本文已归档到：「<a href="https://github.com/dunwu/blog" target="_blank" rel="noopener">blog</a>」</p>
+</blockquote>
+<h2 id="1-分区规则"><a class="markdownIt-Anchor" href="#1-分区规则"></a> 1. 分区规则</h2>
+<p><strong>分布式数据库</strong> 首先要解决把 <strong>整个数据集</strong> 按照 <strong>分区规则</strong> 映射到 <strong>多个节点</strong> 的问题，即把 <strong>数据集</strong> 划分到 <strong>多个节点</strong> 上，每个节点负责 <strong>整体数据</strong> 的一个 <strong>子集</strong>。</p>
+<div align="center">
+<img src="http://dunwu.test.upcdn.net/cs/design/architecture/partition-rule.png!zp" />
+</div>
+<p>数据分布通常有 <strong>哈希分区</strong> 和 <strong>顺序分区</strong> 两种方式，对比如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分区方式</th>
+<th style="text-align:left">特点</th>
+<th style="text-align:left">相关产品</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">哈希分区</td>
+<td style="text-align:left">离散程度好，数据分布与业务无关，无法顺序访问</td>
+<td style="text-align:left">Redis Cluster，Cassandra，Dynamo</td>
+</tr>
+<tr>
+<td style="text-align:left">顺序分区</td>
+<td style="text-align:left">离散程度易倾斜，数据分布与业务相关，可以顺序访问</td>
+<td style="text-align:left">BigTable，HBase，Hypertable</td>
+</tr>
+</tbody>
+</table>
+<p>由于 <code>Redis Cluster</code> 采用 <strong>哈希分区规则</strong>，这里重点讨论 <strong>哈希分区</strong>。常见的 <strong>哈希分区</strong> 规则有几种，下面分别介绍：</p>
+<h3 id="11-节点取余分区"><a class="markdownIt-Anchor" href="#11-节点取余分区"></a> 1.1. 节点取余分区</h3>
+<p>使用特定的数据，如 <code>Redis</code> 的 <strong>键</strong> 或 <strong>用户</strong> <code>ID</code>，再根据 <strong>节点数量</strong> <code>N</code> 使用公式：<code>hash（key）% N</code> 计算出 <strong>哈希值</strong>，用来决定数据 <strong>映射</strong> 到哪一个节点上。</p>
+<div align="center">
+<img src="http://dunwu.test.upcdn.net/cs/design/architecture/partition-hash-mod.png!zp" />
+</div>
+<ul>
+<li><strong>优点</strong></li>
+</ul>
+<p>这种方式的突出优点是 <strong>简单性</strong>，常用于 <strong>数据库</strong> 的 <strong>分库分表规则</strong>。一般采用 <strong>预分区</strong> 的方式，提前根据 <strong>数据量</strong> 规划好 <strong>分区数</strong>，比如划分为 <code>512</code> 或 <code>1024</code> 张表，保证可支撑未来一段时间的 <strong>数据容量</strong>，再根据 <strong>负载情况</strong> 将 <strong>表</strong> 迁移到其他 <strong>数据库</strong> 中。扩容时通常采用 <strong>翻倍扩容</strong>，避免 <strong>数据映射</strong> 全部被 <strong>打乱</strong>，导致 <strong>全量迁移</strong> 的情况。</p>
+<ul>
+<li><strong>缺点</strong></li>
+</ul>
+<p>当 <strong>节点数量</strong> 变化时，如 <strong>扩容</strong> 或 <strong>收缩</strong> 节点，数据节点 <strong>映射关系</strong> 需要重新计算，会导致数据的 <strong>重新迁移</strong>。</p>
+<h3 id="12-一致性哈希分区"><a class="markdownIt-Anchor" href="#12-一致性哈希分区"></a> 1.2. 一致性哈希分区</h3>
+<p><strong>一致性哈希</strong> 可以很好的解决 <strong>稳定性问题</strong>，可以将所有的 <strong>存储节点</strong> 排列在 <strong>首尾相接</strong> 的 <code>Hash</code> 环上，每个 <code>key</code> 在计算 <code>Hash</code> 后会 <strong>顺时针</strong> 找到 <strong>临接</strong> 的 <strong>存储节点</strong> 存放。而当有节点 <strong>加入</strong> 或 <strong>退出</strong> 时，仅影响该节点在 <code>Hash</code> 环上 <strong>顺时针相邻</strong> 的 <strong>后续节点</strong>。</p>
+<div align="center">
+<img src="http://dunwu.test.upcdn.net/cs/design/architecture/partition-consistent-hash.png!zp" />
+</div>
+<ul>
+<li><strong>优点</strong></li>
+</ul>
+<p><strong>加入</strong> 和 <strong>删除</strong> 节点只影响 <strong>哈希环</strong> 中 <strong>顺时针方向</strong> 的 <strong>相邻的节点</strong>，对其他节点无影响。</p>
+<ul>
+<li><strong>缺点</strong></li>
+</ul>
+<p><strong>加减节点</strong> 会造成 <strong>哈希环</strong> 中部分数据 <strong>无法命中</strong>。当使用 <strong>少量节点</strong> 时，<strong>节点变化</strong> 将大范围影响 <strong>哈希环</strong> 中 <strong>数据映射</strong>，不适合 <strong>少量数据节点</strong> 的分布式方案。<strong>普通</strong> 的 <strong>一致性哈希分区</strong> 在增减节点时需要 <strong>增加一倍</strong> 或 <strong>减去一半</strong> 节点才能保证 <strong>数据</strong> 和 <strong>负载的均衡</strong>。</p>
+<blockquote>
+<p><strong>注意</strong>：因为 <strong>一致性哈希分区</strong> 的这些缺点，一些分布式系统采用 <strong>虚拟槽</strong> 对 <strong>一致性哈希</strong> 进行改进，比如 <code>Dynamo</code> 系统。</p>
+</blockquote>
+<h3 id="13-虚拟槽分区"><a class="markdownIt-Anchor" href="#13-虚拟槽分区"></a> 1.3. 虚拟槽分区</h3>
+<p><strong>虚拟槽分区</strong> 巧妙地使用了 <strong>哈希空间</strong>，使用 <strong>分散度良好</strong> 的 <strong>哈希函数</strong> 把所有数据 <strong>映射</strong> 到一个 <strong>固定范围</strong> 的 <strong>整数集合</strong> 中，整数定义为 <strong>槽</strong>（<code>slot</code>）。这个范围一般 <strong>远远大于</strong> 节点数，比如 <code>Redis Cluster</code> 槽范围是 <code>0 ~ 16383</code>。<strong>槽</strong> 是集群内 <strong>数据管理</strong> 和 <strong>迁移</strong> 的 <strong>基本单位</strong>。采用 <strong>大范围槽</strong> 的主要目的是为了方便 <strong>数据拆分</strong> 和 <strong>集群扩展</strong>。每个节点会负责 <strong>一定数量的槽</strong>，如图所示：</p>
+<div align="center">
+<img src="http://dunwu.test.upcdn.net/cs/design/architecture/partition-hash-slot.png!zp" />
+</div>
+当前集群有 `3` 个节点，每个节点平均大约负责 `5460` 个 **槽**。由于采用 **高质量** 的 **哈希算法**，每个槽所映射的数据通常比较 **均匀**，将数据平均划分到 `3` 个节点进行 **数据分区**。`Redis Cluster` 就是采用 **虚拟槽分区**。
+<p>集群中的每个节点负责一部分哈希槽，比如集群中有３个节点，则：</p>
+<ul>
+<li>节点Ａ存储的哈希槽范围是：0 – 5460</li>
+<li>节点Ｂ存储的哈希槽范围是：5461 – 10922</li>
+<li>节点Ｃ存储的哈希槽范围是：10923 – 16383</li>
+</ul>
+<p>这种结构很容易 <strong>添加</strong> 或者 <strong>删除</strong> 节点。如果 <strong>增加</strong> 一个节点 <code>4</code>，就需要从节点 <code>1 ~ 3</code> 获得部分 <strong>槽</strong> 分配到节点 <code>4</code> 上。如果想 <strong>移除</strong> 节点 <code>1</code>，需要将节点 <code>1</code> 中的 <strong>槽</strong> 移到节点 <code>2 ~ 3</code> 上，然后将 <strong>没有任何槽</strong> 的节点 <code>1</code> 从集群中 <strong>移除</strong> 即可。</p>
+<blockquote>
+<p>由于从一个节点将 <strong>哈希槽</strong> 移动到另一个节点并不会 <strong>停止服务</strong>，所以无论 <strong>添加删除</strong> 或者 <strong>改变</strong> 某个节点的 <strong>哈希槽的数量</strong> 都不会造成 <strong>集群不可用</strong> 的状态.</p>
+</blockquote>
+<h2 id="2-参考资料"><a class="markdownIt-Anchor" href="#2-参考资料"></a> 2. 参考资料</h2>
+<ul>
+<li><a href="https://juejin.im/post/5b8fc5536fb9a05d2d01fb11" target="_blank" rel="noopener">深入剖析 Redis 系列(三) - Redis 集群模式搭建与原理详解</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Zhang Peng
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://dunwu.github.io/blog/distributed/distributed-storage-theory/" title="分布式存储基本原理">https://dunwu.github.io/blog/distributed/distributed-storage-theory/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"># 分布式</a>
+              <a href="/blog/tags/%E5%AD%98%E5%82%A8/" rel="tag"># 存储</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/blog/distributed/distributed-id-theory/" rel="next" title="分布式 ID 基本原理">
+                  <i class="fa fa-chevron-left"></i> 分布式 ID 基本原理
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/blog/distributed/sharding-theory/" rel="prev" title="分库分表基本原理">
+                  分库分表基本原理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式存储基本原理"><span class="nav-text"> 分布式存储基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-分区规则"><span class="nav-text"> 1. 分区规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-节点取余分区"><span class="nav-text"> 1.1. 节点取余分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-一致性哈希分区"><span class="nav-text"> 1.2. 一致性哈希分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-虚拟槽分区"><span class="nav-text"> 1.3. 虚拟槽分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-参考资料"><span class="nav-text"> 2. 参考资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Zhang Peng"
+    src="/blog/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhang Peng</p>
+  <div class="site-description" itemprop="description">Dunwu's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dunwu" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;dunwu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:forbreak@163.com" title="E-Mail &amp;rarr; mailto:forbreak@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-paper-plane"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Peng</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">397k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+<script src="/blog/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-ajay4qmfci.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://dunwu.github.io/blog/distributed/distributed-storage-theory/",
+            identifier: "distributed/distributed-storage-theory/",
+            title: "分布式存储基本原理"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://blog-ajay4qmfci.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>
